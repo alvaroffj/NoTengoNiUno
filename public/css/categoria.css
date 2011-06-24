@@ -1,0 +1,112 @@
+#form-wrapper {
+    text-align: right;
+}
+
+#form-wrapper h2 {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.form-inline .element {
+/*    border: 1px solid #ccc;*/
+    padding: 5px;
+    display: inline-block;
+}
+
+.submit {
+    margin-left: 10px;
+    padding: 10px 5px;
+    display: inline-block;
+}
+
+.submit input {
+    border: none;
+    background: #8CDE4B url('../img/overlay.png') repeat-x top left;
+/*    border: 1px solid #46b8b0;*/
+    padding: 5px 15px;
+    text-align: center;
+    width: 120px;
+    color: #fff;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    font-size: 14px;
+/*    font-weight: bold;*/
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.submit input.working {
+    background: #ccc;
+}
+
+.element .label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.element input.text-input,
+.element select,
+.element textarea,
+.element .wysiwyg {
+    margin: 0;
+    padding: 6px;
+    border: 1px solid #d5d5d5;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid #ccc;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+.element .small-input {
+    width: 200px !important;
+}
+
+.error {
+    /*    background: #ffcece url('../images/icons/cross_circle.png');*/
+    border-color: #df8f8f;
+    color: #665252;
+    background-color: #ffcece;
+}
+
+table.categorias {
+    margin-top: 10px;
+}
+
+table.categorias thead tr {
+    border-bottom: 1px solid #ccc;
+}
+
+table.categorias thead tr th {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+table.categorias tbody tr td {
+    padding: 10px 5px;
+}
+
+table.categorias tbody tr.par{
+    background: #ededed;
+}
+
+span.edit:hover {
+    border-bottom: 1px dashed #ccc;
+}
+
+span.edit form input {
+    padding: 0px 2px;
+    margin: 0;
+}

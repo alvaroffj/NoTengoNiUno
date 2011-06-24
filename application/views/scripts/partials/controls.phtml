@@ -1,0 +1,38 @@
+<?php if ($this->pageCount) { ?>
+    <div class="paginacion">
+    <?php if (isset($this->previous)){ ?>
+        <span class="active"><a href="<?php echo $this->url(array('page' => $this->first)); ?>">Primera</a></span>
+    <?php }else{ ?>
+        <span class="disabled">Primera</span>
+    <?php } ?>
+
+    <?php if (isset($this->previous)){ ?>
+        <span class="active"><a href="<?php echo $this->url(array('page' => $this->previous)); ?>">&lt; Anterior</a></span>
+    <?php }else{ ?>
+        <span class="disabled">&lt; Anterior</span>
+    <?php } ?>
+
+    <?php foreach ($this->pagesInRange as $page): ?>
+        <?php if ($page != $this->current): ?>
+            <span class="active"><a href="<?php echo $this->url(array('page' => $page)); ?>">
+                <?php echo $page; ?>
+            </a></span>
+        <?php else: ?>
+            <span class="current"><?php echo $page; ?></span>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    <?php if (isset($this->next)){ ?>
+        <span class="active"><a href="<?php echo $this->url(array('page' => $this->next)); ?>">Siguiente &gt;</a></span>
+    <?php }else{ ?>
+        <span class="disabled">Siguiente &gt;</span>
+    <?php } ?>
+
+    <?php if (isset($this->next)){ ?>
+        <span class="active"><a href="<?php echo $this->url(array('page' => $this->last)); ?>">&Uacute;ltima</a></span>
+    <?php }else{ ?>
+        <span class="disabled">&Uacute;ltima</span>
+    <?php } ?>
+        <div class="clear"></div>
+    </div>
+<?php } ?>

@@ -1,0 +1,9 @@
+<h3>Resumen</h3>
+<dl>
+    <dt>Ingresos:</dt>
+    <dd><span class="positivo">$ <?= number_format($this->ing, 0, '', '.'); ?></span></dd>
+    <dt>Egresos:</dt>
+    <dd><span class="negativo">$ <?= number_format($this->gas, 0, '', '.'); ?></span></dd>
+    <dt>Balance:</dt>
+    <dd><?= ($this->bal > 0) ? "<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>" : "<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
+</dl>

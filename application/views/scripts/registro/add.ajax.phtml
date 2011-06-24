@@ -1,0 +1,10 @@
+<tr id="<?=$this->res->getIdRegistro()?>">
+    <td align="center"><?=$this->res->getFechaRegistro()?></td>
+    <td align="center"><?=$this->res->getIdCategoria()?></td>
+    <td><?=$this->res->getDescRegistro()?></td>
+    <td><?= ($this->res->getIdTipoRegistro()==1) ? "<span class='positivo'>$ " . number_format($this->res->getMontoRegistro(), 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($this->res->getMontoRegistro(), 0, '', '.') . "</span>"; ?></td>
+    <td align="center">
+        <a href="#" onClick="cargaTransaccion('<?=$this->res->getIdRegistro();?>'); return false;"><img src="img/edit.png" alt="Editar" title="Editar" border="0" /></a>
+        <a href="#" onClick="delTransaccion('<?=$this->res->getIdRegistro();?>'); return false;"><img src="img/delete.png" alt="Eliminar" title="Eliminar" border="0" /></a>
+    </td>
+</tr>

@@ -1,0 +1,104 @@
+<h1>Dashboard</h1>
+<div id="mainGrafico" class="grafico-grande"></div>
+<div class="resumen">
+    <h3>Resumen</h3>
+    <dl>
+        <dt>Ingresos:</dt>
+        <dd><span class="positivo">$ <?=number_format($this->ing, 0, '', '.'); ?></span></dd>
+        <dt>Egresos:</dt>
+        <dd><span class="negativo">$ <?=number_format($this->gas, 0, '', '.'); ?></span></dd>
+        <dt>Balance:</dt>
+        <dd><?=($this->bal>0)?"<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>":"<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
+    </dl>
+</div>
+<script>
+    chartRes = new Highcharts.Chart({
+        chart: {
+            renderTo: 'mainGrafico',
+            zoomType: 'x',
+            spacingRight: 20
+        },
+        title: {
+            text: 'Balance'
+        },
+        subtitle: {
+            text: 'Click y arrastrar para acercar'
+        },
+        xAxis: {
+            type: 'datetime',
+            maxZoom: 5 * 24 * 3600000, // fourteen days
+            title: {
+                text: 'Fecha'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Monto'
+            },
+            startOnTick: false,
+            showFirstLabel: false
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                   enabled: false
+                },
+                enableMouseTracking: false
+             },
+            area: {
+                fillColor: {
+                    linearGradient: [0, 0, 0, 300],
+                    stops: [
+                    [0, 'rgba(2,0,0,2)'],
+                    [1, 'rgba(2,0,0,0)']
+                    ]
+                },
+                lineWidth: 1,
+                marker: {
+                    enabled: false,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            radius: 5
+                        }
+                    }
+                },
+                shadow: false,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                }
+            }
+        },
+
+        series: [
+            <?
+            $j = 0;
+            foreach($this->mainGrafico as $s) { ?>
+                <? if($j==0) { ?>
+                    {
+                        type: 'line',
+                        name: '<?=$s[0]?>',
+                        pointInterval: 24 * 3600 * 1000,
+                        pointStart: Date.UTC(<?=date("Y")?>, <?=(date("m")-2)?>, <?=date("d")?>),
+                        data: [<?=$s[1]?>]
+                    }
+                <? } else { ?>
+                    ,{
+                        type: 'line',
+                        name: '<?=$s[0]?>',
+                        pointInterval: 24 * 3600 * 1000,
+                        pointStart: Date.UTC(<?=date("Y")?>, <?=(date("m")-2)?>, <?=date("d")?>),
+                        data: [<?=$s[1]?>]
+                    }
+                <? } ?>
+            <?
+            $j++;
+            } ?>
+            ]
+    });
+</script>

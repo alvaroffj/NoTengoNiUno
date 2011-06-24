@@ -1,0 +1,58 @@
+<?php $this->headTitle()->append('Registros');?>
+<?php $this->form->setAction($this->url(array(
+        'controller' => 'Registro',
+        'action'     => 'add'
+    ),
+    'default',
+    true)); ?>
+<h1>Transacciones</h1>
+<div class="sub-nav"><a href="#" onClick="addTransaccion(); return false;"><img src="<?=$this->baseUrl()?>/img/add.png" border="0" title="Nueva Transaccion"/>Nueva Transaccion</a></div>
+<div id="form-wrapper" class="flotando" style="display: none;">
+    <h2>Agregar Transaccion</h2><span class="btn popup"></span>
+    <div class="notification information png_bg">
+        <div>Completa los datos para registrar una transaccion</div>
+    </div>
+    <?php echo $this->form; ?>
+</div>
+<!--<div class="registro-wrapper chico">-->
+<div class="resumen">
+    <h3>Resumen</h3>
+    <dl>
+        <dt>Ingresos:</dt>
+        <dd><span class="positivo">$ <?=number_format($this->ing, 0, '', '.'); ?></span></dd>
+        <dt>Egresos:</dt>
+        <dd><span class="negativo">$ <?=number_format($this->gas, 0, '', '.'); ?></span></dd>
+        <dt>Balance:</dt>
+        <dd><?=($this->bal>0)?"<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>":"<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
+    </dl>
+</div>
+<table width="100%" class="registro">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Categoria</th>
+            <th>Descripcion</th>
+            <th>Monto</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <? $i=0; ?>
+        <? foreach ($this->paginator as $reg) { ?>
+        <tr class="<?=($i%2==0)?'impar':'par';?> <?=($i==0)?'primero':''?>" id="<?=$reg->getIdRegistro();?>">
+            <td align="center"><?= $reg->getFechaRegistro(); ?></td>
+            <td align="center"><?= $this->catArr[$reg->getIdCategoria()]; ?></td>
+            <td><?= $this->escape((strlen($reg->getDescRegistro())>70)?substr($reg->getDescRegistro(), 0, 70)."...":$reg->getDescRegistro()); ?></td>
+            <td><?= ($reg->getIdTipoRegistro()==1) ? "<span class='positivo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>"; ?></td>
+            <td align="center">
+                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar" border="0" width="20" /></a>
+                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar" border="0" width="20" /></a>
+            </td>
+        </tr>
+        <? $i++; ?>
+        <? } ?>
+    </tbody>
+</table>
+<?php echo $this->paginationControl($this->paginator,'Sliding','/partials/controls.phtml'); ?>
+<!--</div>-->
+<div class="clear"></div>

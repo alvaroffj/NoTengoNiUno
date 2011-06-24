@@ -1,0 +1,262 @@
+/*Tabla de registros*/
+
+.registro-wrapper {
+    padding: 10px;
+}
+.chico {
+    border-right: 1px solid #ededed;
+    width: 600px;
+}
+.amplio {
+    width: 920px;
+}
+
+.resumen {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+.resumen dl {
+    margin-left: 20px;
+}
+
+.resumen dl dt {
+    font-weight: bold;
+    padding: 2px;
+/*    border: 1px solid #ccc;*/
+    display: inline-block;
+    width: 200px;
+}
+
+.resumen dl dd {
+/*    border: 1px solid #ccc;*/
+    padding: 2px;
+    display: inline-block;
+    width: 400px;
+}
+
+table.registro {
+}
+
+table.registro thead tr {
+    border-bottom: 1px solid #ccc;
+}
+
+table.registro thead tr th {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+table.registro tbody tr td {
+    padding: 10px 5px;
+}
+
+table.registro tbody tr.par{
+    background: #ededed;
+}
+table.registro tbody tr.impar{
+    background: #fff;
+}
+
+/*Formulario*/
+#form-wrapper {
+    padding: 15px;
+    width: 300px;
+    height: 300px;
+    -moz-box-shadow: 0px 0px 10px #ccc;
+    -webkit-box-shadow: 0px 0px 10px #ccc;
+    box-shadow: 0px 0px 10px #ccc;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+#form-wrapper h2 {
+    display: inline-block;
+    margin-top: 0;
+}
+#form-wrapper h2.dragable {
+    cursor: move;
+}
+
+.btn {
+    width: 24px;
+    height: 34px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px;
+    float: right;
+}
+
+.popup {
+    background: url('../img/popup.png') 2px 2px no-repeat;
+}
+.popdown {
+    background: url('../img/popdown.png') 2px 2px no-repeat;
+}
+
+.normal {
+    float: right;
+}
+
+.flotando {
+    position: fixed;
+    right: 100px;
+    top: 100px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.form {
+    width: 310px;
+}
+.form .element {
+/*    border: 1px solid #ccc;*/
+    padding: 5px;
+}
+
+.submit {
+    
+    margin-left: 80px;
+    padding: 10px 5px;
+}
+
+.submit input {
+    border: none;
+    background: #8CDE4B url('../img/overlay.png') repeat-x top left;
+/*    border: 1px solid #46b8b0;*/
+    padding: 5px 15px;
+    text-align: center;
+    width: 120px;
+    color: #fff;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    border-radius:5px;
+    font-size: 14px;
+/*    font-weight: bold;*/
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.submit input.working {
+    background: #ccc;
+}
+
+.element .label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px 0;
+/*    border: 1px solid #ccc;*/
+    float:left;
+}
+
+.element input.text-input,
+.element select,
+.element textarea,
+.element .wysiwyg {
+    margin: 0;
+    padding: 6px;
+    border: 1px solid #d5d5d5;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid #ccc;
+    float:left;
+}
+
+.element .small-input {
+    width: 200px !important;
+}
+
+.element .medium-input {
+    width: 400px !important;
+}
+
+.element .large-input {
+    width: 600px !important;
+    /*    font-size: 16px !important;*/
+    padding: 8px !important;
+}
+
+.element textarea {
+    width: 97.5% !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*.element select {
+    padding: 5px;
+    background: #fff;
+    width: 250px;
+}*/
+
+/*.element select option {
+    padding: 5px;
+}*/
+
+.element input[type="checkbox"],
+.element input[type="radio"] {
+    padding: 0;
+    background: none;
+    border: 0;
+}
+
+.notification {
+    display: block;
+    margin: 0 0 5px 0;
+    padding: 0;
+    border: 1px solid #fff;
+    /*    background-position: 10px 11px !important;*/
+    /*    background-repeat: no-repeat !important;*/
+    font-size: 13px;
+    height: 30px;
+    /*    width: 915px;*/
+    background-color: #fff;
+    vertical-align: middle;
+    text-align: left;
+}
+
+
+.attention {
+    background: #fffbcc url('../images/icons/exclamation.png') 10px 11px no-repeat;
+    border-color: #e6db55;
+    color: #666452;
+    background-color: #fffbcc;
+}
+
+.information {
+    /*    background: #dbe3ff url('../images/icons/information.png');*/
+    border-color: #a2b4ee;
+    color: #585b66;
+    background-color: #dbe3ff;
+}
+
+.success {
+    /*    background: #d5ffce url('../images/icons/tick_circle.png');*/
+    border-color: #9adf8f;
+    color: #556652;
+    background-color: #d5ffce;
+}
+
+.error {
+    /*    background: #ffcece url('../images/icons/cross_circle.png');*/
+    border-color: #df8f8f;
+    color: #665252;
+    background-color: #ffcece;
+}
+
+.notification div {
+    display:block;
+    font-style:normal;
+    padding: 5px;
+    line-height: 20px;
+    text-align: center;
+}

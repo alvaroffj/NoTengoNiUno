@@ -1,0 +1,105 @@
+<?php echo $this->doctype() ?>
+<html  xmlns:fb="http://www.facebook.com/2008/fbml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <?php echo $this->headTitle() ?>
+        <?php echo $this->headLink() ?>
+        <?php echo $this->headScript() ?>
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-21023768-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="header-wrapper">
+            <span id="logo">No tengo ni $uno</span>
+<!--                <div id="top-nav">
+                    <ul>
+                        <li class="<?=($this->controlador == "Index")?"active":""?>"><a href="<?php echo $this->url(array('controller' => 'Index', 'action' => 'index'), 'default', true) ?>">Dashboard</a></li>
+                        <li class="<?=($this->controlador == "Proyecto")?"active":""?>"><a href="#">Proyectos</a></li>
+                        <li class="<?=($this->controlador == "Reporte")?"active":""?>"><a href="#">Reportes</a></li>
+                        <li class="<?=($this->controlador == "Transaccion")?"active":""?>"><a href="#">Transacciones</a></li>
+                        <li class="<?=($this->controlador == "Categoria")?"active":""?>"><a href="<?php echo $this->url(array('controller' => 'Categoria', 'action' => 'index'), 'default', true) ?>">Categorias</a></li>
+                        <li class="<?=($this->controlador == "Registro")?"active":""?>"><a href="<?php echo $this->url(array('controller' => 'Registro', 'action' => 'index'), 'default', true) ?>">Registros</a></li>
+                        <li><a href="<?php echo $this->url(array('controller' => 'Log', 'action' => 'index'), 'default', true) ?>">Log</a></li>
+                    </ul>
+                </div>-->
+                <div id="user-info">
+                    <? $me = Zend_Registry::get("me"); ?>
+                    <? if($me) { ?>
+                    <img src="https://graph.facebook.com/<?php echo $me["id"]; ?>/picture" height="26">
+                    <span id="name"><?=$me["name"]?></span>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="#">Perfil</a></li>
+                            <li><a href="#">Configuracion</a></li>
+                            <li><a href="#">Salir</a></li>
+                        </ul>
+                    </div>
+                    <? } ?>
+                </div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div id="sidebar">
+                <div id="side-nav">
+                    <h1 style="padding: 5px 20px; background: #333; display:inline-block; border-left: 20px solid #111; margin-left: -20px;">Menu</h1>
+                    <ul>
+                        <li><a class="<?=($this->controlador == "Index")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Index', 'action' => 'index'), 'default', true) ?>">Dashboard</a></li>
+                        <li><a class="<?=($this->controlador == "Proyecto")?"active":""?>" href="#">Proyectos</a></li>
+                        <li><a class="<?=($this->controlador == "Reporte")?"active":""?>" href="#">Reportes</a></li>
+                        <li><a class="<?=($this->controlador == "Transaccion")?"active":""?>" href="#">Transacciones</a></li>
+                        <li><a class="<?=($this->controlador == "Categoria")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Categoria', 'action' => 'index'), 'default', true) ?>">Categorias</a></li>
+                        <li><a class="<?=($this->controlador == "Registro")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Registro', 'action' => 'index'), 'default', true) ?>">Registros</a>
+                            <?php if($this->controlador == "Registro") { ?>
+                            <ul>
+                                <?php foreach($this->cat as $cat) {?>
+                                    <li><a class="<?=($this->id == $cat->idCategoria)?"active":""?>" href="<?php echo $this->url(array('controller' => 'Registro', 'action' => 'categoria', 'id'=>$cat->idCategoria), 'default', true) ?>"><?php echo $cat->categoria." "; ?></a></li>
+                                <?php } ?>
+                            </ul>
+                            <?php } ?>
+                        </li>
+<!--                        <li><a href="<?php echo $this->url(array('controller' => 'Log', 'action' => 'index'), 'default', true) ?>">Log</a></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div id="content">
+                <?php echo $this->layout()->content; ?>
+            </div>
+            <div class="clear"></div>
+            <div id="footer">
+                <p><a href="http://notengoniuno.flawers.me/public/">No tengo ni $uno</a> | Desarrollado por <a href="http://twitter.com/#!/Neeph" class="yo">@Neeph</a> en sus ratos de ocio =)</p>
+            </div>
+        </div>
+        <div id="aire"></div>
+        <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId   : '<?php echo $this->facebook->getAppId(); ?>',
+                    session : <?=(Zend_Registry::get("session"))?json_encode(Zend_Registry::get("session")):'null'; ?>, // don't refetch the session when PHP already has it
+                    status  : true, // check login status
+                    cookie  : true, // enable cookies to allow the server to access the session
+                    xfbml   : true // parse XFBML
+                });
+            };
+
+            (function() {
+                var e = document.createElement('script');
+                e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+                e.async = true;
+                document.getElementById('fb-root').appendChild(e);
+            }());
+        </script>
+    </body>
+</html>
