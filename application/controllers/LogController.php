@@ -3,6 +3,7 @@
 class LogController extends Zend_Controller_Action {
 
     public function init() {
+        echo "Log.init<br>";
         $fb = Zend_Registry::get("facebook");
         $this->fb = new Facebook($fb);
         $this->session = $this->fb->getSession();
@@ -59,7 +60,6 @@ class LogController extends Zend_Controller_Action {
     }
 
     public function inAction() {
+        echo "Log.in<br>";
     }
-
 }
-

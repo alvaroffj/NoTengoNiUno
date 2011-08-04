@@ -35,8 +35,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 Zend_Registry::getInstance()->set('session', null);
 //                $response = new Zend_Controller_Response_Http();
 //                $response->setRedirect('/public/Log/in');
-//                $front->setResponse($response);
-                header("Location: /public/Log/in");
+//                $front->setResponse($response); 
+
+                header("Location: index.php/Log/in");
                 die();
             }
         }
@@ -67,6 +68,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headScript()->appendFile($view->BaseUrl().'/js/facebook.js');
         $view->headScript()->appendFile($view->BaseUrl().'/js/base.js');
     }
-
 }
-

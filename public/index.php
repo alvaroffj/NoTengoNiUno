@@ -37,8 +37,8 @@ $application = new Zend_Application(
 );
 
 $registry = Zend_Registry::getInstance()->set("facebook",$facebook);
-$font_controller = Zend_Controller_Front::getInstance();
-$font_controller->setBaseUrl("/public");
+//$font_controller = Zend_Controller_Front::getInstance();
+//$font_controller->setBaseUrl("/public");
 
 $application->bootstrap()
             ->run();

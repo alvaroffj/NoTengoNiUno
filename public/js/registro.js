@@ -6,7 +6,7 @@ var $resumen;
 var $tabla;
 function delTransaccion(id) {
     $.ajax({
-        url: 'http://notengoniuno.flawers.me/public/Registro/desactiva/',
+        url: 'http://notengoniuno.gpsline.cl/index.php/Registro/desactiva/',
         dataType: 'json',
         data: {
             id: id
@@ -23,7 +23,7 @@ function delTransaccion(id) {
 
 function cargaTotales() {
     $.ajax({
-        url: 'http://notengoniuno.flawers.me/public/Registro/carga-Totales/',
+        url: 'http://notengoniuno.gpsline.cl/index.php/Registro/carga-Totales/',
         dataType: 'html',
         data: {
             format: 'html'
@@ -39,7 +39,7 @@ function cargaTotales() {
 
 function cargaTransaccion(id) {
     $.ajax({
-        url: 'http://notengoniuno.flawers.me/public/Registro/carga/',
+        url: 'http://notengoniuno.gpsline.cl/index.php/Registro/carga/',
         dataType: 'json',
         data: {
             id: id
@@ -155,7 +155,8 @@ $(document).ready(function() {
                         $(".notification").html("<div>La transaccion fue guardada correctamente</div>");
                         $(".notification").attr("class", "notification success png_bg");
                         form.reset();
-                        var retornoPhp = $.parseJSON(data.responseText);
+//                        var retornoPhp = $.parseJSON(data.responseText);
+                        var retornoPhp = data;
                         lala = data.responseText;
                         lele = retornoPhp;
                         cargaTotales();

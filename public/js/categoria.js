@@ -2,7 +2,7 @@ var validator;
 var $form;
 $(document).ready(function() {
     $form = $(".form-inline");
-    $('.edit').editable('/public/Categoria/mod', {
+    $('.edit').editable('/index.php/Categoria/mod', {
 //        loadurl : '/public/Categoria/mod',
         indicator : 'Guardando...',
         tooltip : 'Click para editar...',

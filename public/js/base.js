@@ -15,7 +15,7 @@ Cufon.replace('#logo');
 //Cufon.replace('h3', {textShadow: '1px 1px #000'});
 $(function($){
     var d = new Date();
-    var nFotos = 19;
+    var nFotos = 20;
     var fotoHoy = d.getDate()%nFotos;
     $.supersized({
         start_slide : 0,		//Start slide (0 is random) //Requires multiple background images
@@ -27,7 +27,8 @@ $(function($){
         fit_landscape : 0,		//Landscape images will not exceed browser width
         image_protect :	1,		//Disables image dragging and right click with Javascript
         slides : [ 		//Background image
-            { image : 'http://notengoniuno.flawers.me/public/background/'+fotoHoy+'.jpg'}
+            { image : 'http://notengoniuno.gpsline.cl/background/'+fotoHoy+'.jpg'}
         ]
     });
+    console.log('http://notengoniuno.gpsline.cl/background/'+fotoHoy+'.jpg');
 });

@@ -3,6 +3,7 @@
 class IndexController extends Zend_Controller_Action {
 
     public function init() {
+        echo "index.init<br>";
         $this->view->headLink()->appendStylesheet($this->view->BaseUrl() . '/themes/base/jquery.ui.all.css');
         $this->view->headLink()->appendStylesheet($this->view->BaseUrl() . '/css/dashboard.css');
         $this->view->headScript()->appendFile($this->view->BaseUrl() . '/js/ui/jquery.ui.core.js');
