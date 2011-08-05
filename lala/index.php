@@ -3,7 +3,7 @@ require_once "../library/facebook.php";
 
 $appapikey = "175385569152277";
 $appsecret = "355bb35d0ba65daf4503b462fce4c8cc";
-$appcallbackurl = "notengoniuno.flawers.me/public/";
+$appcallbackurl = "notengoniuno.flawers.me/";
 
 $facebook = array(
     'appId' => $appapikey,
