@@ -6,7 +6,7 @@ var $resumen;
 var $tabla;
 function delTransaccion(id) {
     $.ajax({
-        url: 'http://notengoniuno.gpsline.cl/index.php/Registro/desactiva/',
+        url: 'Registro/desactiva/',
         dataType: 'json',
         data: {
             id: id
@@ -23,7 +23,7 @@ function delTransaccion(id) {
 
 function cargaTotales() {
     $.ajax({
-        url: 'http://notengoniuno.gpsline.cl/index.php/Registro/carga-Totales/',
+        url: 'Registro/carga-Totales/',
         dataType: 'html',
         data: {
             format: 'html'
@@ -39,7 +39,7 @@ function cargaTotales() {
 
 function cargaTransaccion(id) {
     $.ajax({
-        url: 'http://notengoniuno.gpsline.cl/index.php/Registro/carga/',
+        url: 'Registro/carga/',
         dataType: 'json',
         data: {
             id: id

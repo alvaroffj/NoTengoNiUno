@@ -27,7 +27,7 @@ $(function($){
         fit_landscape : 0,		//Landscape images will not exceed browser width
         image_protect :	1,		//Disables image dragging and right click with Javascript
         slides : [ 		//Background image
-            { image : 'http://notengoniuno.gpsline.cl/background/'+fotoHoy+'.jpg'}
+            { image : '../background/'+fotoHoy+'.jpg'}
         ]
     });
     console.log('http://notengoniuno.gpsline.cl/background/'+fotoHoy+'.jpg');

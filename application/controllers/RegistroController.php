@@ -24,13 +24,16 @@ class RegistroController extends Zend_Controller_Action {
         $this->view->headScript()->appendFile($this->view->BaseUrl() . '/js/registro.js');
 
         $this->me = Zend_Registry::get("me");
-        if (!isset($this->me['id_usuario'])) {
-            $us = new Application_Model_Usuario();
-            $usMP = new Application_Model_UsuarioMP();
-            $usMP->fetchByFb($this->me['id'], $us);
-            $this->me['id_usuario'] = $us->getIdUsuario();
+        $this->me["id_usuario"] = 1;
+        $this->me["id"] = "705091365";
+//        if (!isset($this->me['id_usuario'])) {
+//            echo "not logged<br>";
+//            $us = new Application_Model_Usuario();
+//            $usMP = new Application_Model_UsuarioMP();
+//            $usMP->fetchByFb($this->me['id'], $us);
+//            $this->me['id_usuario'] = $us->getIdUsuario();
             Zend_Registry::getInstance()->set('me', $this->me);
-        }
+//        }
         $request = $this->getRequest();
         $this->view->controlador = $request->getControllerName();
         //        echo "0<br>";

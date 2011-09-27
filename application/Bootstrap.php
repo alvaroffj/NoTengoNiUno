@@ -8,39 +8,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $request= new Zend_Controller_Request_Http();
         $front->setRequest($request);
         
-        $fb = Zend_Registry::get("facebook");
         $this->bootstrap('View');
         $view = $this->getResource('View');
-        $view->facebook = new Facebook($fb);
-        $this->me = null;
-        if ($view->facebook->getSession()) {
-            try {
-                $this->uid = $view->facebook->getUser();
-                $this->me = $view->facebook->api('/me');
-//                $this->me_sess = Zend_Registry::get("me");
-//                if($this->me_sess["id"] != $this->me["id"]) {
-                    Zend_Registry::getInstance()->set('me', $this->me);
-                    Zend_Registry::getInstance()->set('session', $view->facebook->getSession());
-//                }
-            } catch (FacebookApiException $e) {
-                error_log($e);
-            }
-        }
-        if (!$this->me) {
-            $contr = $front->getRequest()->getRequestUri();
-            $contr = split("/", $contr);
-            if($contr[2] != "Log") {
-//                echo "salto<br>";
-                Zend_Registry::getInstance()->set('me', null);
-                Zend_Registry::getInstance()->set('session', null);
-//                $response = new Zend_Controller_Response_Http();
-//                $response->setRedirect('/public/Log/in');
-//                $front->setResponse($response); 
-
-                header("Location: index.php/Log/in");
-                die();
-            }
-        }
+        $this->me["id_usuario"] = 1;
+        $this->me["id"] = "705091365";
+        Zend_Registry::getInstance()->set('me', $this->me);
         return $request;
     }
 
