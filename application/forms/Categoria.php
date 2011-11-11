@@ -3,6 +3,7 @@
 class Application_Form_Categoria extends Zend_Form {
 
     public function init() {
+        $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $this->clearDecorators()
                 ->addDecorator('FormElements')
                 ->addDecorator('Form', array('class' => 'form-inline', 'id' => 'trans'))
@@ -15,14 +16,33 @@ class Application_Form_Categoria extends Zend_Form {
                     ),
                 ));
         $this->setMethod('post');
-//
+        
         $this->addElement('text', 'categoria', array(
             'label' => '',
             'required' => true,
             'filters' => array('StringTrim'),
-            'class' => 'text-input small-input required'
+            'class' => 'span4 required'
         ));
-//
+        
+        $usProMP = new Application_Model_ProyectoMP();
+        $select = $usProMP->getDbTable()->select();
+        $select->from('PROYECTO')
+                ->join('USUARIO_PROYECTO', 'PROYECTO.ID_PROYECTO = USUARIO_PROYECTO.ID_PROYECTO', array())
+                ->where('USUARIO_PROYECTO.ID_USUARIO = ?', $authNamespace->id_usuario);
+        
+        $usPro = $usProMP->fetchAll($select);
+        
+        $selUsPro = array();
+        foreach ($usPro as $c) {
+            $selUsPro[$c->getIdProyecto()] = $c->getNomProyecto();
+        }
+        $this->addElement('select', 'idProyecto', array(
+            'label' => '',
+            'required' => true,
+            'multiOptions' => $selUsPro,
+            'class' => 'span3'
+        ));
+
 //        $this->addElement('text', 'color', array(
 //            'label' => 'Color:',
 //            'required' => true,
@@ -33,11 +53,10 @@ class Application_Form_Categoria extends Zend_Form {
 //        ));
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
-            'description' => '<a href="#">Cancelar</a>',
-            'label' => 'Guardar',
+            'label' => 'Agregar',
+            'class' => 'btn primary',
             'decorators' => array(
                 array('ViewHelper'),
-                array('Description', array('escape' => false, 'tag' => 'span', 'class' => 'element-cancel-link')),
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit clear large green'))
             )
         ));

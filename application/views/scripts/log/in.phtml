@@ -1,3 +1,16 @@
-<div>
-    <a onClick="conecta(); return false;" href="#"><img src="http://static.ak.fbcdn.net/rsrc.php/zB6N8/hash/4li2k73z.gif" border="0"></a>
+<div id="info-login">
+    
 </div>
+<div id="do-login">
+    <h2>Conectate usando tu cuenta de Facebook</h2>
+    <? 
+        $fb = Zend_Registry::get("facebook"); 
+        $params = array(
+            scope => 'email,publish_stream,offline_access',
+            redirect_uri => 'http://www.melogaste.com/Log/save'
+        );
+    ?>
+    <a href="<?=$fb->getLoginUrl($params)?>"><img src="http://static.ak.fbcdn.net/rsrc.php/zB6N8/hash/4li2k73z.gif" border="0" width="200" /></a>
+    <div class="fb-facepile" data-width="300" data-max-rows="4"></div>
+</div>
+<div class="clear"></div>

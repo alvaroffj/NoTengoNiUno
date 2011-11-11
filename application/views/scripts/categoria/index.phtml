@@ -6,30 +6,28 @@
     'default',
     true));?>
 <h1>Categorias</h1>
-<div id="form-wrapper" class="normal">
-    <h2>Agregar Categoria</h2>
+<div id="formCat" class="normal">
+    <h2>Nueva Categoria: </h2>
     <?php echo $this->form; ?>
 </div>
-<table border="0" cellspacing="0" cellpadding="0" width="100%" class="categorias">
+<table class="zebra-striped" id="tabla">
     <thead>
         <tr>
-            <th width="200">Categoria</th>
-            <th>Ingresos</th>
-            <th>Egresos</th>
+            <th>Categoria</th>
+            <th class="green">Ingresos</th>
+            <th class="red">Egresos</th>
             <th>Balance</th>
-            <th>Accion</th>
         </tr>
     </thead>
     <tbody>
         <? $i=0; ?>
         <?php foreach($this->cat as $cat) { ?>
         <? $bal=$cat->getIngresos()-$cat->getEgresos(); ?>
-        <tr class="<?=($i%2==0)?'impar':'par';?> <?=($i==0)?'primero':''?>" id="<?=$cat->getIdCategoria();?>">
-            <td><span class="edit" id="<?=$cat->getIdCategoria();?>"><? echo $cat->getCategoria();?></span></td>
+        <tr id="<?=$cat->getIdCategoria();?>">
+            <td class="editable"><span class="edit" id="<?=$cat->getIdCategoria();?>"><? echo $cat->getCategoria();?></span></td>
             <td><span class="positivo">$ <? echo number_format($cat->getIngresos(), 0, '', '.');?></span></td>
             <td><span class="negativo">$ <? echo number_format($cat->getEgresos(), 0, '', '.');?></span></td>
             <td><?= ($bal>0) ? "<span class='positivo'>$ " . number_format($bal, 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($bal*-1, 0, '', '.') . "</span>"; ?></td>
-            <td></td>
         </tr>
         <? $i++; ?>
         <?php } ?>

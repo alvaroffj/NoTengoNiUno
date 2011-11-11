@@ -1,5 +1,4 @@
 <h1>Dashboard</h1>
-<div id="mainGrafico" class="grafico-grande"></div>
 <div class="resumen">
     <h3>Resumen</h3>
     <dl>
@@ -11,6 +10,7 @@
         <dd><?=($this->bal>0)?"<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>":"<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
     </dl>
 </div>
+<div id="mainGrafico" class="grafico-grande"></div>
 <script>
     chartRes = new Highcharts.Chart({
         chart: {
@@ -84,7 +84,7 @@
                         type: 'line',
                         name: '<?=$s[0]?>',
                         pointInterval: 24 * 3600 * 1000,
-                        pointStart: Date.UTC(<?=date("Y")?>, <?=(date("m")-2)?>, <?=date("d")?>),
+                        pointStart: Date.UTC(<?=date("Y")?>, <?=(date("m")-4)?>, <?=date("d")?>),
                         data: [<?=$s[1]?>]
                     }
                 <? } else { ?>
@@ -92,7 +92,7 @@
                         type: 'line',
                         name: '<?=$s[0]?>',
                         pointInterval: 24 * 3600 * 1000,
-                        pointStart: Date.UTC(<?=date("Y")?>, <?=(date("m")-2)?>, <?=date("d")?>),
+                        pointStart: Date.UTC(<?=date("Y")?>, <?=(date("m")-4)?>, <?=date("d")?>),
                         data: [<?=$s[1]?>]
                     }
                 <? } ?>

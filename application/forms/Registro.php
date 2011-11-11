@@ -3,6 +3,7 @@
 class Application_Form_Registro extends Zend_Form {
 
     public function init() {
+        $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $me = Zend_Registry::get('me');
         $this->clearDecorators()
                 ->addDecorator('FormElements')
@@ -11,12 +12,32 @@ class Application_Form_Registro extends Zend_Form {
                     array('ViewHelper'),
                     array('Errors'),
                     array('Description', array('tag' => 'span', 'class' => 'hint')),
-                    array('Label', array('separator' => ' ', 'class' => 'label' )),
-                    array('HtmlTag', array('tag' => 'div', 'class' => 'element clear')
+                    array('Label', array('separator' => ' ', 'style' => 'width: 70px; margin-right: 10px')),
+                    array('HtmlTag', array('tag' => 'div', 'class' => 'clearfix')
                     ),
                 ));
 
         $this->setMethod('post');
+        
+        $usProMP = new Application_Model_ProyectoMP();
+        $select = $usProMP->getDbTable()->select();
+        $select->from('PROYECTO')
+                ->join('USUARIO_PROYECTO', 'PROYECTO.ID_PROYECTO = USUARIO_PROYECTO.ID_PROYECTO', array())
+                ->where('USUARIO_PROYECTO.ID_USUARIO = ?', $authNamespace->id_usuario);
+        
+        $usPro = $usProMP->fetchAll($select);
+//        print_r($usPro);
+        $selUsPro = array();
+        foreach ($usPro as $c) {
+            $selUsPro[$c->getIdProyecto()] = $c->getNomProyecto();
+        }
+        $this->addElement('select', 'idProyecto', array(
+            'label' => 'Proyecto:',
+            'required' => true,
+            'multiOptions' => $selUsPro,
+            'class' => 'small-input'
+        ));
+        
         $attr = array('ID_TIPO_REGISTRO', 'TIPO_REGISTRO');
         $trMP = new Application_Model_TipoRegistroMP();
         $tr = $trMP->fetchAll($attr);
@@ -49,6 +70,13 @@ class Application_Form_Registro extends Zend_Form {
         $this->addElement('hidden', 'idRegistro', array(
             'value' => null
         ));
+        
+        $this->addElement('text', 'fechaRegistro', array(
+            'label' => 'Fecha:',
+            'required' => true,
+            'readonly' => true,
+            'class' => 'text-input small-input required'
+        ));
 
         $this->addElement('text', 'montoRegistro', array(
             'label' => 'Monto:',
@@ -56,11 +84,6 @@ class Application_Form_Registro extends Zend_Form {
             'class' => 'text-input small-input required number'
         ));
 
-        $this->addElement('text', 'fechaRegistro', array(
-            'label' => 'Fecha:',
-            'required' => true,
-            'class' => 'text-input small-input required'
-        ));
 
         $this->addElement('text', 'descRegistro', array(
             'label' => 'Descripción:',
@@ -70,12 +93,12 @@ class Application_Form_Registro extends Zend_Form {
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
-            'description' => '<a href="#" onClick="limpiaTransaccion(); return false;">Cancelar</a>',
+            'description' => '<label style="width:80px;"></label><a href="#" onClick="limpiaTransaccion(); return false;" class="negativo">Cancelar</a>',
             'label' => 'Guardar',
+            'class' => 'btn primary',
             'decorators' => array(
                 array('ViewHelper'),
                 array('Description', array('escape' => false, 'tag' => 'span', 'class' => 'element-cancel-link')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'submit clear large green'))
             )
         ));
 

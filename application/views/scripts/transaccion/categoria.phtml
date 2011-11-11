@@ -6,12 +6,9 @@
     'default',
     true)); ?>
 <h1>Transacciones</h1>
-<div class="sub-nav"><a href="#" onClick="addTransaccion(); return false;"><img src="<?=$this->baseUrl()?>/img/add.png" border="0" title="Nueva Transaccion"/>Nueva Transaccion</a></div>
+<!--<div class="sub-nav"><a href="#" onClick="addTransaccion(); return false;"><img src="<?=$this->baseUrl()?>/img/add.png" border="0" title="Nueva Transaccion"/>Nueva Transaccion</a></div>-->
 <div id="form-wrapper" class="flotando" style="display: none;">
-    <h2>Agregar Transaccion</h2><span class="btn popup"></span>
-    <div class="notification information png_bg">
-        <div>Completa los datos para registrar una transaccion</div>
-    </div>
+    <h2>Nueva Transacci&oacute;n</h2><span class="btnIco popup"></span>
     <?php echo $this->form; ?>
 </div>
 <!--<div class="registro-wrapper chico">-->
@@ -26,7 +23,7 @@
         <dd><?=($this->bal>0)?"<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>":"<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
     </dl>
 </div>
-<table width="100%" class="registro">
+<table width="100%" id="registro" class="zebra-striped">
     <thead>
         <tr>
             <th>Fecha</th>
@@ -45,8 +42,8 @@
             <td><?= $this->escape((strlen($reg->getDescRegistro())>70)?substr($reg->getDescRegistro(), 0, 70)."...":$reg->getDescRegistro()); ?></td>
             <td><?= ($reg->getIdTipoRegistro()==1) ? "<span class='positivo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>"; ?></td>
             <td align="center">
-                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar" border="0" width="20"/></a>
-                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar" border="0"  width="20"/></a>
+                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar" border="0" width="20" /></a>
+                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar" border="0" width="20" /></a>
             </td>
         </tr>
         <? $i++; ?>

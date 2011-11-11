@@ -37,13 +37,19 @@ class Application_Model_UsuarioMP {
             'FB_UID' => $model->getFbUid()
         );
         $us = $this->fetchByFb($model->getFbUid(), $model, array("ID_USUARIO"));
+        $res = new stdClass();
         if (null === ($id = $model->getIdUsuario())) {
 //            echo "insert<br>";
-            $this->getDbTable()->insert($data);
+            $idUs = $this->getDbTable()->insert($data);
+            $res->ID_USUARIO = $idUs;
+            $res->NUEVO = true;
         } else {
 //            echo "update<br>";
             $this->getDbTable()->update($data, array('ID_USUARIO = ?' => $id));
+            $res->ID_USUARIO = $id;
+            $res->NUEVO = false;
         }
+        return $res;
     }
 
     public function fetchByFb($id, Application_Model_Usuario $data, $attr = null) {
@@ -78,4 +84,3 @@ class Application_Model_UsuarioMP {
     }
 
 }
-

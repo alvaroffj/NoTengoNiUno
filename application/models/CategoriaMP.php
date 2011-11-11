@@ -33,10 +33,13 @@ class Application_Model_CategoriaMP {
 
         if (null === ($id = $model->getIdCategoria())) {
             unset($data['ID_CATEGORIA']);
-            $this->getDbTable()->insert($data);
+            $data["ID_CATEGORIA"] = $this->getDbTable()->insert($data);
         } else {
+            $data["ID_CATEGORIA"] = $id;
             $this->getDbTable()->update($data, array('ID_CATEGORIA = ?' => $id));
         }
+        
+        return $data;
     }
 
     public function find($id, Application_Model_Categoria $data) {
@@ -48,8 +51,8 @@ class Application_Model_CategoriaMP {
         $data->setIdCategoria($row->ID_CATEGORIA);
         $data->setIdProyecto($row->ID_PROYECTO);
         $data->setCategoria($row->CATEGORIA);
-        $data->setColor($row->COLOR_CATEGORIA);
-        $data->setEstado($row->ESTADO_CATEGORIA);
+        $data->setColorCategoria($row->COLOR_CATEGORIA);
+        $data->setEstadoCategoria($row->ESTADO_CATEGORIA);
     }
 
     public function fetchAll($attr = null, $where = null) {

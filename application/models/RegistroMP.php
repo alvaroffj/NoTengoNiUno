@@ -52,10 +52,10 @@ class Application_Model_RegistroMP {
         $data->setIdRegistro($row->ID_REGISTRO);
         $data->setIdTipoRegistro($row->ID_TIPO_REGISTRO);
         $data->setIdCategoria($row->ID_CATEGORIA);
-        $data->setIdRegistro($row->ID_REGISTRO);
         $data->setMontoRegistro($row->MONTO_REGISTRO);
         $data->setFechaRegistro($row->FECHA_REGISTRO);
         $data->setDescRegistro($row->DESC_REGISTRO);
+        $data->setIdProyecto($row->ID_PROYECTO);
     }
 
     public function fetchAll($attr = null, $where = null) {

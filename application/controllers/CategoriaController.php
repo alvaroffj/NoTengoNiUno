@@ -3,6 +3,10 @@
 class CategoriaController extends Zend_Controller_Action {
 
     public function init() {
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('add', array('html', 'json'))
+                ->initContext();
+        
         $this->view->headLink()->appendStylesheet($this->view->BaseUrl() . '/themes/base/jquery.ui.all.css');
         $this->view->headLink()->appendStylesheet($this->view->BaseUrl() . '/css/categoria.css');
         $this->view->headScript()->appendFile($this->view->BaseUrl() . '/js/ui/jquery.ui.core.js');
@@ -35,6 +39,8 @@ class CategoriaController extends Zend_Controller_Action {
         $attr = array("ID_CATEGORIA", "CATEGORIA");
         $where = array('ID_PROYECTO' => $this->me['id_usuario']);
         $this->view->cat = $catMP->fetchBalance($where);
+        $formReg = new Application_Form_Registro();
+        $this->view->formReg = $formReg;
     }
 
     public function addAction() {
@@ -44,10 +50,15 @@ class CategoriaController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $data = new Application_Model_Categoria($form->getValues());
-                $data->setIdProyecto($this->me["id_usuario"]);
+//                $data->setIdProyecto($this->me["id_usuario"]);
                 $MP = new Application_Model_CategoriaMP();
-                $MP->save($data);
-                return $this->_helper->redirector('index');
+                $cat = $MP->save($data);
+                $out["idCategoria"] = $cat["ID_CATEGORIA"];
+                $out["ingresos"] = 0;
+                $out["egresos"] = 0;
+                $out["categoria"] = $cat["CATEGORIA"];
+                $this->view->res = $out;
+//                return $this->_helper->redirector('index');
             }
         }
 

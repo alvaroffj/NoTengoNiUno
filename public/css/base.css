@@ -12,8 +12,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Covered By Your Grace', arial, serif;
-    text-shadow: 1px 1px 1px #000;
-    color: #ededed;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    color: #333;
 /*    font-weight: bold;*/
 }
 
@@ -37,6 +37,7 @@ a {
     display: inline-block;
     padding: 0;
     vertical-align: middle;
+    line-height: normal;
 }
 a img {
     margin: 0px 5px 0 0;
@@ -76,6 +77,7 @@ p {
     width: 950px;
     margin: 55px auto 30px auto;
     text-align: left;
+/*    background-image: url(../img/handmadepaper.png);*/
     background-color: #fff;
     padding: 10px 10px 0px 0;
     -moz-box-shadow: 0px 0px 15px #000;
@@ -100,20 +102,23 @@ p {
 }
 
 #header #header-wrapper {
-    width: 950px;
+    width: 960px;
     margin: 0px auto;
+    position: relative;
 }
 
 #header span#logo {
-    margin-top: 0px;
-    padding: 0px 15px;
-    font-size: 30px;
+    margin-top: 15px;
+    padding: 0px;
+    font-size: 40px;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     color: #ffffff;
     display: inline-block;
     cursor: default;
+    font-family: 'Covered By Your Grace', arial, serif;
+    text-shadow: 1px 1px 10px #000;
 }
 
 #header #top-nav {
@@ -139,16 +144,32 @@ p {
     border-bottom: 4px solid #4ECDC4;
 }
 
-#header #user-info {
-    padding: 5px 15px;
-    cursor: pointer;
-    background: #222;
+#header #header-nav {
     position: absolute;
     top: 4px;
-    right: 170px;
+    right: 0px;
+}
+
+#header #header-nav > div {
+    padding: 5px 10px;
+    cursor: pointer;
+    background: #222;
     -moz-border-radius: 5px 5px 0px 0px;
     -webkit-border-radius: 5px 5px 0px 0px;
     border-radius: 5px 5px 0px 0px;
+    float: right;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+#header #header-nav > div span{
+    display: inline-block;
+    line-height: 25px;
+}
+
+#header #header-nav > div img {
+    float: left;
+    margin-right: 5px;
 }
 
 #header #user-info:hover {
@@ -162,9 +183,7 @@ p {
 }
 
 #header #user-info span#name {
-/*    border: 1px solid #fff;*/
-    margin-top: 7px;
-    display: inline-block;
+    
 }
 
 #header #user-info:hover .dropdown{
@@ -252,15 +271,17 @@ p {
 
 #sidebar #side-nav ul li a.active{
     color: #fff;
+    padding: 10px 15px;
 }
 
 #sidebar #side-nav ul li a:hover{
     background: #efefef;
     border-left: 5px solid #ccc;
+    padding: 10px 15px;
 }
 
 #sidebar #side-nav ul li a {
-    padding: 10px 15px;
+    padding: 10px 20px;
     display: block;
 }
 
@@ -275,16 +296,24 @@ p {
 }
 
 #sidebar #side-nav ul li ul li a{
-    padding: 7px 15px;
+    padding: 7px 20px;
     display: block;
 }
 
+#sidebar #side-nav ul li ul li a:hover{
+    padding: 7px 15px;
+    background: #efefef;
+    border-left: 5px solid #ccc;
+}
+
 #sidebar #side-nav ul li ul li a.active{
+    padding: 7px 15px;
     background: #999;
     border-left: 5px solid #666;
 }
 
 #sidebar #side-nav ul li ul li a.active:hover{
+    padding: 7px 15px;
     background: #999;
     border-left: 5px solid #666;
 }
@@ -351,7 +380,10 @@ p {
     color: #57a000;
 }
 .sub-nav {
-    text-align: right;
+    float:right;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 20px;
 }
 .sub-nav a {
     font-family: 'Covered By Your Grace', arial, serif;
@@ -362,4 +394,132 @@ p {
 
 #aire {
     height: 5px;
+}
+
+#login {
+    padding: 10px;
+}
+#login #info-login {
+    width: 590px;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+#login #do-login {
+    font-family: 'Covered By Your Grace', arial, serif;
+    text-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+    font-size: 19px;
+    font-weight: bold;
+    color: #666;
+    text-align: center;
+    width: 300px;
+    float: right;
+    padding: 5px 10px 10px 10px;
+    background-color: whitesmoke;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+#login #do-login h2{
+    font-family: 'Covered By Your Grace', arial, serif;
+    text-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+    font-size: 19px;
+    font-weight: normal;
+    color: #666;
+}
+
+.fb-facepile {
+    margin-top: 10px;
+    border-top: 1px solid #ededed;
+}
+
+/*Formulario*/
+#formReg {
+    padding: 15px;
+    width: 300px;
+/*    height: 300px;*/
+    -moz-box-shadow: 0px 0px 10px #ccc;
+    -webkit-box-shadow: 0px 0px 10px #ccc;
+    box-shadow: 0px 0px 10px #ccc;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+#formReg h2 {
+    display: inline-block;
+    margin-top: 0;
+}
+#formReg h2.dragable {
+    cursor: move;
+}
+
+.btnIco {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px;
+    float: right;
+}
+
+.popup {
+    background: url('../img/popup.png') 2px 2px no-repeat;
+}
+.popdown {
+    background: url('../img/popdown.png') 2px 2px no-repeat;
+}
+
+.normal {
+    float: right;
+}
+
+.flotando {
+    position: fixed;
+    right: 100px;
+    top: 100px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.form {
+    width: 310px;
+    margin-bottom: 0px;
+}
+
+.hasDatepicker {
+    cursor: pointer !important;
+    background-color: white !important;
+}
+
+.resumen {
+    border: 1px solid whitesmoke;
+    background-color: whitesmoke;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+.resumen dl {
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+.resumen dl dt {
+    font-weight: bold;
+    padding: 2px;
+/*    border: 1px solid #ccc;*/
+    display: inline-block;
+    width: 200px;
+}
+
+.resumen dl dd {
+/*    border: 1px solid #ccc;*/
+    padding: 2px;
+    display: inline-block;
+    width: 400px;
 }

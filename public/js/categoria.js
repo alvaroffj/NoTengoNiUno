@@ -1,25 +1,56 @@
-var validator;
-var $form;
+var validatorCat,
+    $formCat;
 $(document).ready(function() {
-    $form = $(".form-inline");
-    $('.edit').editable('/index.php/Categoria/mod', {
-//        loadurl : '/public/Categoria/mod',
-        indicator : 'Guardando...',
-        tooltip : 'Click para editar...',
-        id : $(this).id,
-        name : "nomCat",
-        width: 150,
-        height: 15
+//    $("table#tabla").tablesorter({sortList: [[1,0]]});
+    $(".edit").twipsy({
+        'placement':'left',
+        'offset': 5
     });
-    validator = $form.bind("invalid-form.validate",
+    $formCat = $(".form-inline");
+    $submitCat = $("#submit", $formCat);
+    $('.edit').editable('/index.php/Categoria/mod', {
+        indicator : 'Guardando...',
+        tooltip : 'Click para editar',
+        id : $(this).id,
+        name : "nomCat"
+    });
+    validatorCat = $formCat.bind("invalid-form.validate",
         function() {
-//            $(".notification").html("<div>Debe completar todos lo campos requeridos</div>");
-//            $(".notification").attr("class", "notification error png_bg");
         }).validate({
         errorPlacement: function(error, element) {
         },
         submitHandler: function(form) {
-            form.submit();
+//            form.submit();
+            if(!$submitCat.hasClass("disabled")) {
+                $.ajax({
+                    url: form.action,
+                    type: 'post',
+                    dataType: 'json',
+                    context: form,
+                    data: {
+                        idProyecto: $("#idProyecto option:selected", $formCat).val()
+                        , categoria: $("#categoria", $formCat).val()
+                        , format: 'json'
+                    },
+                    beforeSend: function() {
+                        $submitCat.val("Guardando...").addClass("disabled");
+                    },
+                    complete: function(data) {
+                        $submitCat.removeClass("disabled").val("Guardar");
+                        form.reset();
+                        var retornoPhp = $.parseJSON(data.responseText), 
+                            fila;
+                        fila = "<tr id='"+retornoPhp.res.idCategoria+"'>";
+                        fila += "<td class='editable'><span class='edit' id='"+retornoPhp.res.idCategoria+"'>"+retornoPhp.res.categoria+"</span></td>";
+                        fila += "<td><span class='positivo'>$ 0</span></td>";
+                        fila += "<td><span class='negativo'>$ 0</span></td>";
+                        fila += "<td><span class='positivo'>$ 0</span></td>";
+                        fila += "</tr>";
+                        $(fila).hide().appendTo("#tabla tbody").fadeIn();
+                    }
+                });
+            }
+            return false;
         },
         success: function(label) {
         }

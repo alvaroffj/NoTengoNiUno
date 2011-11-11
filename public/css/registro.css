@@ -11,35 +11,6 @@
     width: 920px;
 }
 
-.resumen {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border-radius:5px;
-}
-
-.resumen dl {
-    margin-left: 20px;
-}
-
-.resumen dl dt {
-    font-weight: bold;
-    padding: 2px;
-/*    border: 1px solid #ccc;*/
-    display: inline-block;
-    width: 200px;
-}
-
-.resumen dl dd {
-/*    border: 1px solid #ccc;*/
-    padding: 2px;
-    display: inline-block;
-    width: 400px;
-}
-
 table.registro {
 }
 
@@ -65,7 +36,7 @@ table.registro tbody tr.impar{
     background: #fff;
 }
 
-/*Formulario*/
+/*Formulario
 #form-wrapper {
     padding: 15px;
     width: 300px;
@@ -86,7 +57,7 @@ table.registro tbody tr.impar{
     cursor: move;
 }
 
-.btn {
+.btnIco {
     width: 24px;
     height: 34px;
     cursor: pointer;
@@ -116,7 +87,8 @@ table.registro tbody tr.impar{
 
 .form {
     width: 310px;
-}
+    margin-bottom: 0px;
+}*/
 .form .element {
 /*    border: 1px solid #ccc;*/
     padding: 5px;
@@ -165,11 +137,8 @@ table.registro tbody tr.impar{
 .element textarea,
 .element .wysiwyg {
     margin: 0;
-    padding: 6px;
-    border: 1px solid #d5d5d5;
     font-size: 13px;
     color: #333;
-    border: 1px solid #ccc;
     float:left;
 }
 
@@ -259,4 +228,9 @@ table.registro tbody tr.impar{
     padding: 5px;
     line-height: 20px;
     text-align: center;
+}
+
+.hasDatepicker {
+    cursor: pointer !important;
+    background-color: white !important;
 }

@@ -1,6 +1,6 @@
 <?php
 
-class RegistroController extends Zend_Controller_Action {
+class TransaccionController extends Zend_Controller_Action {
 
     public function init() {
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
@@ -22,30 +22,27 @@ class RegistroController extends Zend_Controller_Action {
         $this->view->headScript()->appendFile($this->view->BaseUrl() . '/js/jquery.number_format.js');
         $this->view->headScript()->appendFile($this->view->BaseUrl() . '/js/depagify.jquery.js');
         $this->view->headScript()->appendFile($this->view->BaseUrl() . '/js/registro.js');
-
+            
         $this->me = Zend_Registry::get("me");
-        $this->me["id_usuario"] = 1;
-        $this->me["id"] = "705091365";
-//        if (!isset($this->me['id_usuario'])) {
-//            echo "not logged<br>";
-//            $us = new Application_Model_Usuario();
-//            $usMP = new Application_Model_UsuarioMP();
-//            $usMP->fetchByFb($this->me['id'], $us);
-//            $this->me['id_usuario'] = $us->getIdUsuario();
-            Zend_Registry::getInstance()->set('me', $this->me);
-//        }
+        if(!isset($this->me["id_usuario"])) {
+            $data = new Application_Model_Usuario();
+            $MP = new Application_Model_UsuarioMP();
+            $MP->fetchByFb($this->me["id"], $data);
+            $this->me["id_usuario"] = $data->getIdUsuario();
+            $authNamespace->id_usuario = $this->me["id_usuario"];
+        }
+        Zend_Registry::getInstance()->set('me', $this->me);
         $request = $this->getRequest();
         $this->view->controlador = $request->getControllerName();
-        //        echo "0<br>";
     }
 
     public function indexAction() {
         Zend_Paginator::setDefaultScrollingStyle('Sliding');
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
         $regMP = new Application_Model_RegistroMP();
-        $form = new Application_Form_Registro();
-        $this->view->form = $form;
-
+        $formReg = new Application_Form_Registro();
+        
+        $this->view->formReg = $formReg;
         $this->view->ing = $regMP->fetchSumTipo(1, $this->me['id_usuario']);
         $this->view->gas = $regMP->fetchSumTipo(2, $this->me['id_usuario']);
         $this->view->bal = $this->view->ing - $this->view->gas;
@@ -78,12 +75,20 @@ class RegistroController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $data = new Application_Model_Registro($form->getValues());
-                $data->setIdProyecto($this->me['id_usuario']);
+//                $data->setIdProyecto($this->me['id_usuario']);
                 $MP = new Application_Model_RegistroMP();
                 $res = $MP->save($data);
                 $data->setIdRegistro($res);
+                
+                $MPCat = new Application_Model_CategoriaMP();
+                $cat = new Application_Model_Categoria();
+                $MPCat->find($data->getIdCategoria(), $cat);
+                
+//                print_r($cat);
+                
                 $out["idRegistro"] = $data->getIdRegistro();
-                $out["idCategoria"] = $data->getIdCategoria();
+                $out["idCategoria"] = $cat->getIdCategoria();
+                $out["nomCategoria"] = $cat->getCategoria();
                 $out["idTipoRegistro"] = $data->getIdTipoRegistro();
                 $out["montoRegistro"] = $data->getMontoRegistro();
                 $out["fechaRegistro"] = $data->getFechaRegistro();
@@ -107,12 +112,19 @@ class RegistroController extends Zend_Controller_Action {
             $reg = new Application_Model_Registro();
             $MP = new Application_Model_RegistroMP();
             $MP->find($id, $reg);
+            
+            $MPCat = new Application_Model_CategoriaMP();
+            $cat = new Application_Model_Categoria();
+            $MPCat->find($reg->getIdCategoria(), $cat);
+            
             $out["idRegistro"] = $reg->getIdRegistro();
-            $out["idCategoria"] = $reg->getIdCategoria();
+            $out["idCategoria"] = $cat->getIdCategoria();
+            $out["nomCategoria"] = $cat->getCategoria();
             $out["idTipoRegistro"] = $reg->getIdTipoRegistro();
             $out["montoRegistro"] = $reg->getMontoRegistro();
             $out["fechaRegistro"] = $reg->getFechaRegistro();
             $out["descRegistro"] = $reg->getDescRegistro();
+            $out["idProyecto"] = $reg->getIdProyecto();
 
             $this->view->reg = $out;
         }
@@ -171,6 +183,15 @@ class RegistroController extends Zend_Controller_Action {
             $this->view->cat = $catMP->fetchAll($attr, $where);
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
 

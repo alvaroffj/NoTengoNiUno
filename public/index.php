@@ -1,18 +1,7 @@
 <?php
-//require_once "../library/facebook.php";
-//
-//$appapikey = "175385569152277";
-//$appsecret = "355bb35d0ba65daf4503b462fce4c8cc";
-//$appcallbackurl = "notengoniuno.flawers.me/";
-//
-//$facebook = array(
-//    'appId' => $appapikey,
-//    'secret' => $appsecret,
-////    'appcallbackurl' => $appcallbackurl,
-//    'cookie' => true
-//);
-//
-//
+require_once "../library/facebook.php";
+
+
 // Define path to application directory
 defined('APPLICATION_PATH')
         || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
@@ -36,7 +25,7 @@ $application = new Zend_Application(
                 APPLICATION_PATH . '/configs/application.ini'
 );
 //
-$registry = Zend_Registry::getInstance()->set("facebook",$facebook);
+//$registry = Zend_Registry::getInstance()->set("facebook",$facebook);
 //$font_controller = Zend_Controller_Front::getInstance();
 //$font_controller->setBaseUrl("/public");
 
