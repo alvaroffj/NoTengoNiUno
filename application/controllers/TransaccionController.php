@@ -75,7 +75,7 @@ class TransaccionController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $data = new Application_Model_Registro($form->getValues());
-//                $data->setIdProyecto($this->me['id_usuario']);
+                $data->setIdUsuario($this->me['id_usuario']);
                 $MP = new Application_Model_RegistroMP();
                 $res = $MP->save($data);
                 $data->setIdRegistro($res);
@@ -184,14 +184,3 @@ class TransaccionController extends Zend_Controller_Action {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

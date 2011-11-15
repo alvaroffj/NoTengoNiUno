@@ -28,7 +28,8 @@ class Application_Model_RegistroMP {
             'ID_PROYECTO' => $model->getIdProyecto(),
             'MONTO_REGISTRO' => $model->getMontoRegistro(),
             'FECHA_REGISTRO' => $model->getFechaRegistro(),
-            'DESC_REGISTRO' => $model->getDescRegistro()
+            'DESC_REGISTRO' => $model->getDescRegistro(),
+            'ID_USUARIO' => $model->getIdUsuario()
         );
         if ('' === ($id = $model->getIdRegistro())) {
             $data['ID_REGISTRO'] = null;
@@ -83,6 +84,7 @@ class Application_Model_RegistroMP {
                 $entry->setIdTipoRegistro($row->ID_TIPO_REGISTRO);
                 $entry->setIdCategoria($row->ID_CATEGORIA);
                 $entry->setIdProyecto($row->ID_PROYECTO);
+                $entry->setIdUsuario($row->ID_USUARIO);
                 $entry->setMontoRegistro($row->MONTO_REGISTRO);
                 $entry->setFechaRegistro($row->FECHA_REGISTRO);
                 $entry->setDescRegistro($row->DESC_REGISTRO);

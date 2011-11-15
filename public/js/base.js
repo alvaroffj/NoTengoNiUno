@@ -151,8 +151,8 @@ $(document).ready(function() {
 
 $(function($){
     var d = new Date(), 
-        nFotos = 20, 
-        fotoHoy = d.getDate()%nFotos;
+        nFotos = 23, 
+        fotoHoy = d.getDate()%nFotos + 1;
         
     $.supersized({
         start_slide : 0,

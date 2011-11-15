@@ -5,6 +5,7 @@ class Application_Model_Registro {
     protected $_idTipoRegistro;
     protected $_idCategoria;
     protected $_idProyecto;
+    protected $_idUsuario;
     protected $_montoRegistro;
     protected $_fechaRegistro;
     protected $_descRegistro;
@@ -97,5 +98,14 @@ class Application_Model_Registro {
     public function setDescRegistro($desc=null) {
         $this->_descRegistro = $desc;
     }
-}
+    
+    public function getIdUsuario() {
+        return $this->_idUsuario;
+    }
 
+    public function setIdUsuario($idUsuario) {
+        $this->_idUsuario = $idUsuario;
+    }
+
+
+}
