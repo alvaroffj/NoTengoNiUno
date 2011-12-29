@@ -1,36 +1,15 @@
-<?php $this->headTitle()->append('Registros');?>
-<?php $this->form->setAction($this->url(array(
-        'controller' => 'Registro',
-        'action'     => 'add'
-    ),
-    'default',
-    true)); ?>
+<?php $this->headTitle()->append('Transacciones');?>
+<?php $this->headTitle()->append($this->categoria->nombre);?>
 <h1>Transacciones</h1>
-<!--<div class="sub-nav"><a href="#" onClick="addTransaccion(); return false;"><img src="<?=$this->baseUrl()?>/img/add.png" border="0" title="Nueva Transaccion"/>Nueva Transaccion</a></div>-->
-<div id="form-wrapper" class="flotando" style="display: none;">
-    <h2>Nueva Transacci&oacute;n</h2><span class="btnIco popup"></span>
-    <?php echo $this->form; ?>
-</div>
-<!--<div class="registro-wrapper chico">-->
-<div class="resumen">
-    <h3>Resumen</h3>
-    <dl>
-        <dt>Ingresos:</dt>
-        <dd><span class="positivo">$ <?=number_format($this->ing, 0, '', '.'); ?></span></dd>
-        <dt>Egresos:</dt>
-        <dd><span class="negativo">$ <?=number_format($this->gas, 0, '', '.'); ?></span></dd>
-        <dt>Balance:</dt>
-        <dd><?=($this->bal>0)?"<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>":"<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
-    </dl>
-</div>
-<table width="100%" id="registro" class="zebra-striped">
+<h2 class="tooltip" data-placement="right" title="<?="$".number_format($this->categoria->ing, 0, '', '.')." - $".number_format($this->categoria->gas, 0, '', '.')." = $".number_format($this->categoria->bal, 0, '', '.'); ?>"><?=$this->categoria->nombre.": $".number_format($this->categoria->bal, 0, '', '.'); ?></h2>
+<table class="zebra-striped" id="registro" style="<?=(count($this->paginator) > 0)?"":"display:none;"?>">
     <thead>
         <tr>
             <th>Fecha</th>
-            <th>Categoria</th>
-            <th>Descripcion</th>
-            <th>Monto</th>
-            <th>Accion</th>
+            <th>Categor&iacute;a</th>
+            <th>Descripci&oacute;n</th>
+            <th class="blue">Monto</th>
+            <th class="actionCol">Acci&oacute;n</th>
         </tr>
     </thead>
     <tbody>
@@ -40,10 +19,10 @@
             <td align="center"><?= $reg->getFechaRegistro(); ?></td>
             <td align="center"><?= $this->catArr[$reg->getIdCategoria()]; ?></td>
             <td><?= $this->escape((strlen($reg->getDescRegistro())>70)?substr($reg->getDescRegistro(), 0, 70)."...":$reg->getDescRegistro()); ?></td>
-            <td><?= ($reg->getIdTipoRegistro()==1) ? "<span class='positivo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>"; ?></td>
-            <td align="center">
-                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar" border="0" width="20" /></a>
-                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar" border="0" width="20" /></a>
+            <td class="<?= ($reg->getIdTipoRegistro()==1)?"green":"red" ?>">$ <?=number_format($reg->getMontoRegistro(), 0, '', '.')?></td>
+            <td class="actionCol">
+                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar transacción" border="0" width="20" class="tooltip" style="margin:0;"/></a>
+                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar transacción" border="0" width="20" class="tooltip" style="margin:0;"/></a>
             </td>
         </tr>
         <? $i++; ?>

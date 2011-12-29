@@ -101,8 +101,6 @@ class Application_Form_Registro extends Zend_Form {
                 array('Description', array('escape' => false, 'tag' => 'span', 'class' => 'element-cancel-link')),
             )
         ));
-
-        
     }
 
 }

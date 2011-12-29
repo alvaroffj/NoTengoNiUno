@@ -16,7 +16,7 @@
             <th>Categoria</th>
             <th class="green">Ingresos</th>
             <th class="red">Egresos</th>
-            <th>Balance</th>
+            <th class="blue">Balance</th>
         </tr>
     </thead>
     <tbody>
@@ -24,10 +24,10 @@
         <?php foreach($this->cat as $cat) { ?>
         <? $bal=$cat->getIngresos()-$cat->getEgresos(); ?>
         <tr id="<?=$cat->getIdCategoria();?>">
-            <td class="editable"><span class="edit" id="<?=$cat->getIdCategoria();?>"><? echo $cat->getCategoria();?></span></td>
-            <td><span class="positivo">$ <? echo number_format($cat->getIngresos(), 0, '', '.');?></span></td>
-            <td><span class="negativo">$ <? echo number_format($cat->getEgresos(), 0, '', '.');?></span></td>
-            <td><?= ($bal>0) ? "<span class='positivo'>$ " . number_format($bal, 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($bal*-1, 0, '', '.') . "</span>"; ?></td>
+            <td class="editable"><span class="edit tooltip" title="Clic para editar" data-placement="left" id="<?=$cat->getIdCategoria();?>"><? echo $cat->getCategoria();?></span></td>
+            <td class="green">$ <? echo number_format($cat->getIngresos(), 0, '', '.');?></td>
+            <td class="red">$ <? echo number_format($cat->getEgresos(), 0, '', '.');?></td>
+            <td class="<?=($bal>0)?"green":"red";?>">$ <?= number_format($bal, 0, '', '.'); ?></td>
         </tr>
         <? $i++; ?>
         <?php } ?>

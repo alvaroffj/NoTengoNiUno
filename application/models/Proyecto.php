@@ -6,6 +6,9 @@ class Application_Model_Proyecto {
     protected $_nomProyecto;
     protected $_descProyecto;
     protected $_estadoProyecto;
+    protected $_ingresos;
+    protected $_egresos;
+    protected $_balance;
     
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -78,6 +81,30 @@ class Application_Model_Proyecto {
 
     public function setEstadoProyecto($estadoProyecto=null) {
         $this->_estadoProyecto = $estadoProyecto;
+    }
+    
+    public function getIngresos() {
+        return $this->_ingresos;
+    }
+
+    public function setIngresos($ingresos) {
+        $this->_ingresos = $ingresos;
+    }
+
+    public function getEgresos() {
+        return $this->_egresos;
+    }
+
+    public function setEgresos($egresos) {
+        $this->_egresos = $egresos;
+    }
+
+    public function getBalance() {
+        return $this->_balance;
+    }
+
+    public function setBalance($balance) {
+        $this->_balance = $balance;
     }
 }
 

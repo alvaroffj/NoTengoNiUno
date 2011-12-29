@@ -30,9 +30,18 @@ class CategoriaController extends Zend_Controller_Action {
         }
         $request = $this->getRequest();
         $this->view->controlador = $request->getControllerName();
+        $this->regMP = new Application_Model_RegistroMP();
+        $this->proMP = new Application_Model_ProyectoMP();
+        $pro = new Application_Model_Proyecto();
+        $this->proMP->find($this->me['id_usuario'], $pro);
+        $pro->setIngresos($this->regMP->fetchSumTipo(1, $pro->getIdProyecto()));
+        $pro->setEgresos($this->regMP->fetchSumTipo(2, $pro->getIdProyecto()));
+        $pro->setBalance($pro->getIngresos() - $pro->getEgresos());
+        $this->view->proyecto = $pro;
     }
 
     public function indexAction() {
+        
         $catMP = new Application_Model_CategoriaMP();
         $form = new Application_Form_Categoria();
         $this->view->form = $form;

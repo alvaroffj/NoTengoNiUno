@@ -43,6 +43,16 @@ class Application_Model_ProyectoMP {
         }
         return $entries;
     }
+    
+    public function find($id, Application_Model_Proyecto $data) {
+        $result = $this->getDbTable()->find($id);
+        if (0 == count($result)) {
+            return;
+        }
+        $row = $result->current();
+        $data->setNomProyecto($row->NOM_PROYECTO);
+        $data->setIdProyecto($row->ID_PROYECTO);
+    }
 
 }
 

@@ -12,9 +12,11 @@ function delTransaccion(id) {
         },
         beforeSend: function() {
         },
-        complete: function(data) {
+        success: function(data) {
+            console.log(data);
+            updateProyecto(data.pro);
             $("#"+id, $tabla).fadeOut();
-            cargaTotales();
+//            cargaTotales();
         }
     });
 }
@@ -56,4 +58,15 @@ $(document).ready(function() {
     $reg_wrapper = $(".registro-wrapper");
     $resumen = $(".resumen");
     $tabla = $("#registro");
+    $("table#registro").tablesorter({
+        sortList: [[0,1]],
+        headers: { 
+            2: { 
+                sorter: false 
+            }, 
+            4: { 
+                sorter: false 
+            } 
+        }
+    });
 });

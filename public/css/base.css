@@ -7,6 +7,7 @@ body {
     color: #555;
     font-size: 12px;
     text-align: center;
+    cursor: default;
 /*    background: #fff url('../img/bg_body_3.png') no-repeat fixed top left;*/
 }
 
@@ -24,11 +25,11 @@ h1 {
 /*    color: #C44D58;*/
 }
 
-h2 { font-size: 30px; padding: 0 0 10px 0; }
-h3 { font-size: 25px; padding: 0 0 10px 0; }
-h4 { font-size: 16px; padding: 0 0 5px 0; }
-h5 { font-size: 14px; padding: 0 0 5px 0; }
-h6 { font-size: 12px; padding: 0 0 5px 0; }
+h2 { font-size: 30px; margin: 0 0 10px 0; display:inline-block; }
+h3 { font-size: 25px; margin: 0 0 10px 0; }
+h4 { font-size: 16px; margin: 0 0 5px 0; }
+h5 { font-size: 14px; margin: 0 0 5px 0; }
+h6 { font-size: 12px; margin: 0 0 5px 0; }
 
 
 a {
@@ -40,8 +41,17 @@ a {
     line-height: normal;*/
 }
 a img {
-    margin: 0px 5px 0 0;
+    margin: 0px 10px 0 0;
     float: left;
+    opacity: 0.6;
+    transition:opacity 0.5s;
+    -moz-transition:opacity 0.5s;
+    -webkit-transition:opacity 0.5s;
+    -o-transition:opacity 0.5s;
+}
+
+a:hover img {
+    opacity: 1;
 }
 /*a:hover { color: #CDFC43; }*/
 /*a.active { color: #CDFC43; }*/
@@ -75,17 +85,18 @@ p {
 #wrapper {
 /*    border: 1px solid #efefef;*/
     width: 950px;
-    margin: 55px auto 30px auto;
+    margin: 75px auto 0px auto;
     text-align: left;
-/*    background-image: url(../img/handmadepaper.png);*/
-    background-color: #fff;
     padding: 10px 10px 0px 0;
     -moz-box-shadow: 0px 0px 15px #000;
     -webkit-box-shadow: 0px 0px 15px #000;
     box-shadow: 0px 0px 15px #000;
-    -moz-border-radius:5px;
+/*    -moz-border-radius:5px;
     -webkit-border-radius:5px;
-    border-radius:5px;
+    border-radius:5px;*/
+    margin-bottom: 60px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 #header {
@@ -93,18 +104,29 @@ p {
     top: 0px;
     display: block;
     width: 100%;
-    background: url('../img/bg_header.png') repeat-x top left;
+/*    background: url('../img/bg_header.png') repeat-x top left;*/
     color: #fff;
     padding:0;
     text-align: left;
-    height: 50px;
-    z-index: 1000;
+    height: 90px;
+    z-index: 1;
+    background: #3d3f46;
+    background: -moz-linear-gradient(top, #333 0%,#111 90%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333), color-stop(90%,#111));
+    background: -webkit-linear-gradient(top, #333 0%,#111 90%);
+    background: -o-linear-gradient(top, #333 0%,#111 90%);
+    background: -ms-linear-gradient(top, #333 0%,#111 90%);
+    background: linear-gradient(top, #333 0%,#111 90%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#333', endColorstr='#111',GradientType=0 );
+    border-bottom: 1px solid #000;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.6);
 }
 
 #header #header-wrapper {
     width: 960px;
     margin: 0px auto;
     position: relative;
+    height: 90px;
 }
 
 #header span#logo {
@@ -118,7 +140,12 @@ p {
     display: inline-block;
     cursor: default;
     font-family: 'Covered By Your Grace', arial, serif;
-    text-shadow: 1px 1px 10px #000;
+    text-shadow: 0px 0px 12px rgba(0,0,0,0.5);
+    line-height: 30px;
+    position: absolute;
+    bottom: 15px;
+    left: 109px;
+    text-align: right;
 }
 
 #header #top-nav {
@@ -222,23 +249,28 @@ p {
 }
 
 #content {
-    margin-bottom: 10px;
-    margin-left: -5px;
-    padding: 0 0 0 10px;
+/*    margin-bottom: 10px;*/
+    margin-left: 210px;
+    padding: 20px 10px 10px 10px;
 /*    border: 1px solid #ccc;*/
     display: inline-block;
     width: 730px;
     float: left;
-    border-left: 1px solid #efefef;
+/*    border-left: 1px solid #efefef;*/
+    background-color: white;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
 }
 
 #sidebar {
 /*    border: 1px solid #ccc;*/
     display: inline-block;
 /*    margin-right: 10px;*/
-    width: 213px;
+    width: 210px;
     float: left;
-    z-index: 1000;
+    height: 0;
+/*    z-index: 1000;*/
+/*    position: fixed;*/
+/*    background-color: rgba(255, 255, 255, 0.6);*/
 }
 
 #sidebar #side-nav {
@@ -247,9 +279,10 @@ p {
 
 #sidebar #side-nav ul{
 /*    border: 1px solid #ccc;*/
-    width: 213px;
+    width: 215px;
     margin-top: 20px;
     margin-left: -5px;
+    position: fixed;
 }
 
 #sidebar #side-nav ul li {
@@ -257,16 +290,32 @@ p {
 /*    padding: 10px;*/
 /*    border-bottom: 1px dashed #efefef;*/
     border-left: 5px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    font-family: Century Gothic;
+}
+
+#sidebar #side-nav ul li img {
+    opacity: 0.6;
 }
 
 #sidebar #side-nav ul li a.active{
-    background: #4ECDC4;
+    background-color: rgba(78, 205, 196, 0.7);
     border-left: 5px solid #46b8b0;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.4);
+}
+
+#sidebar #side-nav ul li a.active img{
+    opacity: 1;
+}
+
+#sidebar #side-nav ul li a:hover img{
+    opacity: 1;
 }
 
 #sidebar #side-nav ul li a.active:hover{
-    background: #4ECDC4;
+    background-color: rgba(78, 205, 196, 0.7);
     border-left: 5px solid #46b8b0;
+    color: #fff;
 }
 
 #sidebar #side-nav ul li a.active{
@@ -275,7 +324,8 @@ p {
 }
 
 #sidebar #side-nav ul li a:hover{
-    background: #efefef;
+    background-color: rgba(255,255,255,0.5);
+    color: #333;
     border-left: 5px solid #ccc;
     padding: 10px 15px;
 }
@@ -283,11 +333,18 @@ p {
 #sidebar #side-nav ul li a {
     padding: 10px 20px;
     display: block;
+    line-height: 18px;
+    vertical-align: middle;
+    color: #666;
+    transition:background 0.5s;
+    -moz-transition:background 0.5s;
+    -webkit-transition:background 0.5s;
+    -o-transition:background 0.5s;
 }
 
 #sidebar #side-nav ul li ul {
-    margin-left: 20px;
-    width: 194px;
+    margin-left: 0px;
+    width: 215px;
     margin-top: 0px;
 }
 
@@ -296,32 +353,33 @@ p {
 }
 
 #sidebar #side-nav ul li ul li a{
-    padding: 7px 20px;
+    padding: 7px 20px 7px 45px;
     display: block;
 }
 
 #sidebar #side-nav ul li ul li a:hover{
-    padding: 7px 15px;
-    background: #efefef;
+    padding: 7px 15px 7px 40px;
+    background-color: rgba(255,255,255,0.5);
     border-left: 5px solid #ccc;
 }
 
 #sidebar #side-nav ul li ul li a.active{
-    padding: 7px 15px;
-    background: #999;
+    padding: 7px 15px 7px 40px;
+    background-color: rgba(0,0,0,0.4);
     border-left: 5px solid #666;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.4);
 }
 
 #sidebar #side-nav ul li ul li a.active:hover{
-    padding: 7px 15px;
-    background: #999;
+    padding: 7px 15px 7px 40px;
+    background-color: rgba(0,0,0,0.4);
     border-left: 5px solid #666;
 }
 
 #footer {
 /*    border: 1px solid blue;*/
     font-family: 'Covered By Your Grace', arial, serif;
-    background-color: #333;
+    background-color: rgba(0,0,0,0.6);
     padding: 10px;
     text-align: center;
     color: #999;
@@ -329,8 +387,10 @@ p {
     -webkit-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
     font-size: 15px;
-    margin: 0 -10px 0 0;
-/*    text-shadow: 1px 1px 1px #000;*/
+/*    margin: 0 -10px 0 0;*/
+    text-shadow: 0px 0px 6px rgba(0,0,0,0.8);
+    position: absolute;
+    width: 940px;
 }
 #footer a{
     font-size: 16px;
@@ -344,11 +404,19 @@ p {
 }
 
 .paginacion span {
-/*    border: 1px solid #ccc;
+/*    border: 1px solid #ccc;*/
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
-    border-radius:5px;*/
+    border-radius:5px;
     float: left;
+}
+
+.paginacion span a {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    color: #666;
 }
 
 .paginacion .active a{
@@ -358,6 +426,7 @@ p {
 
 .paginacion .active a:hover{
     background: #efefef;
+    color: #333;
 }
 
 .paginacion .disabled {
@@ -371,6 +440,7 @@ p {
     color: #fff;
     display: inline;
     padding: 5px 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .negativo {
@@ -397,25 +467,20 @@ p {
 }
 
 #login {
-    padding: 10px;
+    padding: 20px 10px 20px 10px
 }
 #login #info-login {
-    width: 590px;
+    width: 600px;
     float: left;
-    border: 1px solid #ccc;
-    padding: 5px;
+/*    border: 1px solid #ccc;
+    padding: 5px;*/
 }
 #login #do-login {
-    font-family: 'Covered By Your Grace', arial, serif;
-    text-shadow: 0px 0px 1px rgba(0,0,0,0.3);
-    font-size: 19px;
-    font-weight: bold;
-    color: #666;
     text-align: center;
     width: 300px;
     float: right;
     padding: 5px 10px 10px 10px;
-    background-color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0.6);
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
@@ -522,4 +587,41 @@ p {
     padding: 2px;
     display: inline-block;
     width: 400px;
+}
+#header-wrapper #botonera {
+    position: absolute;
+    bottom: 15px;
+    right: 0px;
+}
+#usuario {
+    display: inline-block;
+    position: absolute;
+    bottom: 15px;
+    left: 220px;
+    width: 570px;
+    font-family: Century Gothic;
+}
+
+#usuario img {
+    float: left;
+    margin-right: 10px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border: 4px solid #333;
+    padding: 0;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.5);
+    width: 50px;
+    height: 50px;
+}
+
+#usuario #name {
+    display: block;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+#usuario #proyecto {
+    font-size: 17px;
+    line-height: 25px;
 }

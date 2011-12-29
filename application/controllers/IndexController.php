@@ -28,18 +28,22 @@ class IndexController extends Zend_Controller_Action {
         Zend_Registry::getInstance()->set('me', $this->me);
         $request = $this->getRequest();
         $this->view->controlador = $request->getControllerName();
+        $this->regMP = new Application_Model_RegistroMP();
+        $this->proMP = new Application_Model_ProyectoMP();
+        $pro = new Application_Model_Proyecto();
+        $this->proMP->find($this->me['id_usuario'], $pro);
+        $pro->setIngresos($this->regMP->fetchSumTipo(1, $pro->getIdProyecto()));
+        $pro->setEgresos($this->regMP->fetchSumTipo(2, $pro->getIdProyecto()));
+        $pro->setBalance($pro->getIngresos() - $pro->getEgresos());
+        $this->view->proyecto = $pro;
     }
 
     public function indexAction() {
-        $regMP = new Application_Model_RegistroMP();
-        $this->view->ing = $regMP->fetchSumTipo(1, $this->me['id_usuario']);
-        $this->view->gas = $regMP->fetchSumTipo(2, $this->me['id_usuario']);
-        $this->view->bal = $this->view->ing - $this->view->gas;
-        $iniBal = $regMP->fetchBalanceHasta($this->me['id_usuario'], date("Y-m-d", mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"))));
+        $iniBal = $this->regMP->fetchBalanceHasta($this->me['id_usuario'], date("Y-m-d", mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"))));
         $this->view->mainGrafico = array();
         //        foreach($cat as $c) {
         $serie[0] = "Balance";
-        $serie[1] = $regMP->fetchBalanceTL($this->me['id_usuario'], date("Y-m-d", mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"))), date("Y-m-d"), $iniBal);
+        $serie[1] = $this->regMP->fetchBalanceTL($this->me['id_usuario'], date("Y-m-d", mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"))), date("Y-m-d"), $iniBal);
         $this->view->mainGrafico[] = $serie;
         //        }
         $formReg = new Application_Form_Registro();

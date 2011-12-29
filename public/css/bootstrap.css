@@ -1091,10 +1091,10 @@ table {
   /* IE7, collapse table to remove spacing */
 
   font-size: 13px;
-  border: 1px solid #ddd;
+/*  border: 1px solid #ddd;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  border-radius: 4px;
+  border-radius: 4px;*/
 }
 table th, table td {
   padding: 10px 10px 9px;
@@ -1223,6 +1223,14 @@ table .purple {
 }
 table .headerSortUp.purple, table .headerSortDown.purple {
   background-color: #e2d5f0;
+}
+table .verde {
+    color: #4ECDC4;
+    border-bottom-color: #46B8B0;
+}
+
+table .headerSortUp.verde, table .headerSortDown.verde {
+    background-color: #e2d5f0;
 }
 
 table .deleted {

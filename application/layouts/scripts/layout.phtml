@@ -32,23 +32,31 @@
     <body>
         <div id="header">
             <div id="header-wrapper">
-                <span id="logo">Me lo Gast&eacute;!</span>
+                <span id="logo">Me lo<br/>Gast&eacute;!</span>
                 <? $me = Zend_Registry::get("me"); ?>
                 <? $fb = Zend_Registry::get("facebook"); ?>
                 <? if($me) { ?>
-                <div id="header-nav">
+                <div id="usuario">
+                    <img src="https://graph.facebook.com/<?= $me["id"]; ?>/picture" height="50">
+                    <span id="name"><?=$me["name"]?></span>
+                    <span id="proyecto" class="tooltip" title="<?="$".number_format($this->proyecto->getIngresos(), 0, '', '.')." - $".number_format($this->proyecto->getEgresos(), 0, '', '.')." = $".number_format($this->proyecto->getBalance(), 0, '', '.'); ?>">Proyecto <?=$this->proyecto->getNomProyecto();?>: <?="$".number_format($this->proyecto->getBalance(), 0, '', '.'); ?></span>
+                </div>
+                <div id="botonera">
+                    <a href="#" onClick="addTransaccion(); return false;" class="btn primary"><img src="<?=$this->baseUrl()?>/img/36.png" border="0" title="Nueva Transaccion"/>Nueva Transacci&oacute;n</a>
+                </div>
+<!--                <div id="header-nav">
                     <div id="user-info">
                         <img src="https://graph.facebook.com/<?= $me["id"]; ?>/picture" height="26">
                         <span id="name"><?=$me["name"]?></span>
-<!--                        <div class="dropdown">
+                        <div class="dropdown">
                             <ul class="unstyled">
                                 <li><a href="#">Perfil</a></li>
                                 <li><a href="#">Configuracion</a></li>
                                 <li><a href="<?=$fb->getLogoutUrl()?>">Salir</a></li>
                             </ul>
-                        </div>-->
+                        </div>
                     </div>
-<!--                    <div id="proyectos-list">
+                    <div id="proyectos-list">
                         <span id="name">Proyecto: Principal</span>
                         <div class="dropdown">
                             <ul class="unstyled">
@@ -57,29 +65,29 @@
                                 <li><a href="<?=$fb->getLogoutUrl()?>">Salir</a></li>
                             </ul>
                         </div>
-                    </div>-->
+                    </div>
                     <div id="invitar">
                         <img src="<?=$this->baseUrl()?>/img/share.png" />
                         <span><a onClick="invitar();">Invita a tus amigos!</a></span>
                     </div>
-                </div>
+                </div>-->
                 <? } ?>
             </div>
         </div>
         <div id="wrapper">
             <?if($me) {?>
             <div id="main-nav">
-                <h1 style="padding: 10px 20px; background-color: #333; display:inline-block; border-left: 20px solid #111; margin-left: -20px; color: whitesmoke;">Proyecto: Principal</h1>
-                <div class="sub-nav"><a href="#" onClick="addTransaccion(); return false;"><img src="<?=$this->baseUrl()?>/img/add.png" border="0" title="Nueva Transaccion"/>Nueva Transacci&oacute;n</a></div>
+<!--                <h1 style="padding: 10px 20px; background-color: #333; display:inline-block; border-left: 20px solid #111; margin-left: -20px; color: whitesmoke;">Proyecto: Principal</h1>-->
+<!--                <div class="sub-nav"><a href="#" onClick="addTransaccion(); return false;"><img src="<?=$this->baseUrl()?>/img/add.png" border="0" title="Nueva Transaccion"/>Nueva Transacci&oacute;n</a></div>-->
             </div>
                 <div id="sidebar">
                     <div id="side-nav">
                         <ul class="unstyled">
-                            <li><a class="<?=($this->controlador == "Index")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Index', 'action' => 'index'), 'default', true) ?>">Dashboard</a></li>
+                            <li><a class="<?=($this->controlador == "Index")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Index', 'action' => 'index'), 'default', true) ?>"><img src="<?=$this->baseUrl()?>/img/6.png" border="0"/>Dashboard</a></li>
 <!--                            <li><a class="<?=($this->controlador == "Proyecto")?"active":""?>" href="#">Proyectos</a></li>
                             <li><a class="<?=($this->controlador == "Reporte")?"active":""?>" href="#">Reportes</a></li>-->
-                            <li><a class="<?=($this->controlador == "Categoria")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Categoria', 'action' => 'index'), 'default', true) ?>">Categorias</a></li>
-                            <li><a class="<?=($this->controlador == "Transaccion")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Transaccion', 'action' => 'index'), 'default', true) ?>">Transacciones</a>
+                            <li><a class="<?=($this->controlador == "Categoria")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Categoria', 'action' => 'index'), 'default', true) ?>"><img src="<?=$this->baseUrl()?>/img/35.png" border="0"/>Categor&iacute;as</a></li>
+                            <li><a class="<?=($this->controlador == "Transaccion")?"active":""?>" href="<?php echo $this->url(array('controller' => 'Transaccion', 'action' => 'index'), 'default', true) ?>"><img src="<?=$this->baseUrl()?>/img/50.png" border="0"/>Transacciones</a>
                                 <?php if($this->controlador == "Transaccion") { ?>
                                 <ul class="unstyled">
                                     <?php foreach($this->cat as $cat) {?>

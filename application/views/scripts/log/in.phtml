@@ -1,5 +1,5 @@
 <div id="info-login">
-    
+<!--    <img src="/img/log/dashboard.JPG" width="600"/>-->
 </div>
 <div id="do-login">
     <h2>Conectate usando tu cuenta de Facebook</h2>
@@ -10,7 +10,7 @@
             redirect_uri => 'http://www.melogaste.com/Log/save'
         );
     ?>
-    <a href="<?=$fb->getLoginUrl($params)?>"><img src="http://static.ak.fbcdn.net/rsrc.php/zB6N8/hash/4li2k73z.gif" border="0" width="200" /></a>
+    <a href="<?=$fb->getLoginUrl($params)?>" class="btn large primary">Usa tu <b>Facebook</b></a>
     <div class="fb-facepile" data-width="300" data-max-rows="4"></div>
 </div>
 <div class="clear"></div>

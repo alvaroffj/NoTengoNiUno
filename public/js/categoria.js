@@ -1,10 +1,16 @@
 var validatorCat,
     $formCat;
 $(document).ready(function() {
-//    $("table#tabla").tablesorter({sortList: [[1,0]]});
-    $(".edit").twipsy({
-        'placement':'left',
-        'offset': 5
+    $("table#tabla").tablesorter({
+        sortList: [[0,0]],
+        headers: { 
+            1: { 
+                sorter: false 
+            }, 
+            2: { 
+                sorter: false 
+            } 
+        }
     });
     $formCat = $(".form-inline");
     $submitCat = $("#submit", $formCat);

@@ -1,37 +1,29 @@
 <?php $this->headTitle()->append('Transacciones');?>
 <h1>Transacciones</h1>
-<div class="resumen">
-    <h3>Resumen</h3>
-    <dl>
-        <dt>Ingresos:</dt>
-        <dd><span class="positivo">$ <?=number_format($this->ing, 0, '', '.'); ?></span></dd>
-        <dt>Egresos:</dt>
-        <dd><span class="negativo">$ <?=number_format($this->gas, 0, '', '.'); ?></span></dd>
-        <dt>Balance:</dt>
-        <dd><?=($this->bal>0)?"<span class='positivo'>$ " . number_format($this->bal, 0, '', '.') . "<span>":"<span class='negativo'>$ " . number_format($this->bal, 0, '', '.') . "<span>"; ?></dd>
-    </dl>
-</div>
+<? if(count($this->paginator) <= 0) { ?>
+<p style="margin: 0 0 100px 0;">Ahora debes ingresar tus transacciones ;)</p>
+<? } ?>
 <table class="zebra-striped" id="registro" style="<?=(count($this->paginator) > 0)?"":"display:none;"?>">
     <thead>
         <tr>
             <th>Fecha</th>
-            <th>Categoria</th>
-            <th>Descripcion</th>
-            <th>Monto</th>
-            <th>Accion</th>
+            <th>Categor&iacute;a</th>
+            <th>Descripci&oacute;n</th>
+            <th class="blue">Monto</th>
+            <th class="actionCol">Acci&oacute;n</th>
         </tr>
     </thead>
     <tbody>
         <? $i=0; ?>
         <? foreach ($this->paginator as $reg) { ?>
-        <tr class="<?=($i%2==0)?'impar':'par';?> <?=($i==0)?'primero':''?>" id="<?=$reg->getIdRegistro();?>">
+        <tr class="<?=($i==0)?'primero':''?>" id="<?=$reg->getIdRegistro();?>">
             <td align="center"><?= $reg->getFechaRegistro(); ?></td>
             <td align="center"><?= $this->catArr[$reg->getIdCategoria()]; ?></td>
             <td><?= $this->escape((strlen($reg->getDescRegistro())>70)?substr($reg->getDescRegistro(), 0, 70)."...":$reg->getDescRegistro()); ?></td>
-            <td><?= ($reg->getIdTipoRegistro()==1) ? "<span class='positivo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>":"<span class='negativo'>$ " . number_format($reg->getMontoRegistro(), 0, '', '.') . "</span>"; ?></td>
-            <td align="center">
-                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar" border="0" width="20"/></a>
-                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar" border="0"  width="20"/></a>
+            <td class="<?= ($reg->getIdTipoRegistro()==1)?"green":"red" ?>">$ <?=number_format($reg->getMontoRegistro(), 0, '', '.')?></td>
+            <td class="actionCol">
+                <a href="#" onClick="cargaTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/edit.png" alt="Editar" title="Editar transacción" border="0" width="20" class="tooltip" style="margin:0;"/></a>
+                <a href="#" onClick="delTransaccion('<?=$reg->getIdRegistro();?>'); return false;"><img src="<?=$this->baseUrl()?>/img/delete.png" alt="Eliminar" title="Eliminar transacción" border="0"  width="20" class="tooltip" style="margin:0;"/></a>
             </td>
         </tr>
         <? $i++; ?>

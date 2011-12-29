@@ -12,20 +12,42 @@ function addTransaccion() {
 }
 
 function cargaTotales() {
-    if($resumen) {
+    if($proyecto) {
         $.ajax({
-            url: 'Transaccion/carga-Totales/',
-            dataType: 'html',
+            url: '/Transaccion/carga-Totales/',
+            dataType: 'json',
             data: {
-                format: 'html'
+                format: 'json'
             },
             beforeSend: function() {
             },
             complete: function(data) {
-                $resumen.html(data.responseText);
+                console.log(data);
             }
         });
     }
+}
+
+function updateProyecto(data) {
+    $proyecto.html("Proyecto " + data.nombre + ": $" + $().number_format(data.balance, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}))
+            .attr("title", "$" + $().number_format(data.ingresos, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}) + " - $" + $().number_format(data.egresos, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}) + " = $" + $().number_format(data.balance, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}));
+}
+
+function getFila(data) {
+    var trClass, fila;
+    if(data.idTipoRegistro == 1) trClass = "positivo";
+    else trClass = "negativo";
+    fila = "<tr id='" + data.idRegistro + "'>";
+    fila += "<td align='center'>" + data.fechaRegistro + "</td>";
+    fila += "<td align='center'>" + data.nomCategoria + "</td><td>" + data.descRegistro + "</td>";
+    fila += "<td><span class='" + trClass + "'>$ " + $().number_format(data.montoRegistro, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}) + "</span></td>";
+    fila += "<td class='actionCol'>";
+    fila += "<a href='#' onClick='cargaTransaccion(\"" + data.idRegistro + "\"); return false;'><img src='/img/edit.png' alt='Editar' title='Editar' border='0' width=20 style='margin:0;'/></a>";
+    fila += "<a href='#' onClick='delTransaccion(\"" + data.idRegistro + "\"); return false;'><img src='/img/delete.png' alt='Eliminar' title='Eliminar' border='0' width=20 style='margin:0;'/></a>";
+    fila += "</td>";
+    fila += "</tr>";
+    
+    return fila;
 }
 
 function limpiaTransaccion() {
@@ -37,7 +59,7 @@ function limpiaTransaccion() {
 }
 
 $(document).ready(function() {
-    $resumen = $(".resumen");
+    $proyecto = $("#proyecto");
     $formRegWrap = $("#formReg");
     $formReg = $(".form", $formRegWrap);
     if($formReg.length>0) {
@@ -85,56 +107,30 @@ $(document).ready(function() {
                             , format: 'json'
                         },
                         beforeSend: function() {
-    //                        alert($("#montoRegistro", $form).val());
                             $("#submit", $formReg).val("Guardando...").addClass("disabled");
                         },
-                        complete: function(data) {
+                        success: function(data) {
                             $("#submit", $formReg).removeClass("disabled").val("Guardar");
-    //                        $(".notification").html("<div>La transaccion fue guardada correctamente</div>");
-    //                        $(".notification").attr("class", "notification success png_bg");
                             form.reset();
-                            var retornoPhp = $.parseJSON(data.responseText);
-                            console.log(retornoPhp);
-                            cargaTotales();
+                            var retornoPhp = data;
+                            console.log(data);
+                            updateProyecto(data.pro);
                             $tabla = $("#registro");
                             if($tabla) {
+                                fila = getFila(retornoPhp.res);
                                 if(save) {
                                     $tabla.fadeIn();
-                                    var clas,
-                                        trClass,
-                                        fila,
+                                    var fila,
                                         pri = $tabla.find(".primero");
-                                        
-                                    if(retornoPhp.res.idTipoRegistro == 1) trClass = "positivo";
-                                    else trClass = "negativo";
-                                    fila = "<tr id='" + retornoPhp.res.idRegistro + "'>";
-                                    fila += "<td align='center'>" + retornoPhp.res.fechaRegistro + "</td>";
-                                    fila += "<td align='center'>" + retornoPhp.res.nomCategoria + "</td><td>" + retornoPhp.res.descRegistro + "</td>";
-                                    fila += "<td><span class='" + trClass + "'>$ " + $().number_format(retornoPhp.res.montoRegistro, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}) + "</span></td>";
-                                    fila += "<td align='center'>";
-                                    fila += "<a href='#' onClick='cargaTransaccion(\"" + retornoPhp.res.idRegistro + "\"); return false;'><img src='/img/edit.png' alt='Editar' title='Editar' border='0' width=20/></a>";
-                                    fila += "<a href='#' onClick='delTransaccion(\"" + retornoPhp.res.idRegistro + "\"); return false;'><img src='/img/delete.png' alt='Eliminar' title='Eliminar' border='0' width=20/></a>";
-                                    fila += "</td>";
-                                    fila += "</tr>";
+                                    
                                     if(pri.length>0) {
-                                        if(pri.hasClass("par")) clas = "impar";
-                                        else clas = "par";
+                                        $(fila).hide().insertBefore(pri).addClass("primero").fadeIn();
                                         pri.removeClass("primero");
-                                        $(fila).hide().insertBefore(pri).addClass("primero").addClass(clas).fadeIn();
                                     } else {
                                         var tb = $tabla.find("tbody");
-                                        $(fila).hide().appendTo(tb).addClass("primero").addClass("impar").fadeIn();
+                                        $(fila).hide().appendTo(tb).fadeIn();
                                     }
                                 } else {
-                                    if(retornoPhp.res.idTipoRegistro == 1) trClass = "positivo";
-                                    else trClass = "negativo";
-                                    fila = "<td align='center'>" + retornoPhp.res.fechaRegistro + "</td>";
-                                    fila += "<td align='center'>" + retornoPhp.res.nomCategoria + "</td><td>" + retornoPhp.res.descRegistro + "</td>";
-                                    fila += "<td><span class='" + trClass + "'>$ " + $().number_format(retornoPhp.res.montoRegistro, {numberOfDecimals:0, decimalSeparator: '', thousandSeparator: '.'}) + "</span></td>";
-                                    fila += "<td align='center'>";
-                                    fila += "<a href='#' onClick=\"cargaTransaccion('" + id + "'); return false;\"><img src='img/edit.png' alt='Editar' title='Editar' border='0' width=20/></a>";
-                                    fila += "<a href='#' onClick=\"delTransaccion('" + id + "'); return false;\"><img src='img/delete.png' alt='Eliminar' title='Eliminar' border='0' width=20/></a>";
-                                    fila += "</td>";
                                     $("#" + id).html(fila);
                                 }
                             }
@@ -151,9 +147,13 @@ $(document).ready(function() {
 
 $(function($){
     var d = new Date(), 
-        nFotos = 23, 
+        nFotos = 25, 
         fotoHoy = d.getDate()%nFotos + 1;
-        
+   $(".tooltip").twipsy({
+        'live': true,
+        'placement': 'below',
+        'offset': 5
+    });     
     $.supersized({
         start_slide : 0,
         vertical_center : 1,

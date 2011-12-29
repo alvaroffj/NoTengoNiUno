@@ -79,8 +79,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->doctype('XHTML1_STRICT');
         $view->headTitle('Me lo Gasté!')
                 ->setSeparator(' :: ');
-//        $view->headLink()->prependStylesheet($view->BaseUrl().'/css/reset.css');
         $view->headLink()->prependStylesheet($view->BaseUrl().'/css/bootstrap.css');
+//        $view->headLink()->headLink(array('href'=>$view->BaseUrl().'/lib/bootstrap.less', 'rel'=>'stylesheet/less'));
+//        $view->headScript()->prependFile($view->BaseUrl().'/js/less-1.1.5.min.js');
         $view->headLink()->appendStylesheet($view->BaseUrl().'/css/base.css');
         $view->headLink()->appendStylesheet($view->BaseUrl().'/css/supersized.core.css');
         $view->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Covered+By+Your+Grace');
